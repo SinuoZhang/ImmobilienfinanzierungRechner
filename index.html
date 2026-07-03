@@ -64,8 +64,7 @@
     .language-switcher {
       display: grid;
       gap: 5px;
-      grid-template-columns: repeat(2, minmax(150px, 1fr));
-      min-width: 320px;
+      min-width: 156px;
       margin-left: auto;
     }
 
@@ -75,11 +74,6 @@
       font-weight: 850;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-    }
-
-    .switcher-field {
-      display: grid;
-      gap: 5px;
     }
 
     h1 {
@@ -867,24 +861,13 @@
         </div>
         </div>
         <div class="language-switcher">
-          <div class="switcher-field">
-            <label for="languageSelect" data-i18n="languageLabel">Sprache</label>
-            <select id="languageSelect" aria-label="Sprache auswählen" data-i18n-aria-label="languageSelectAria">
-              <option value="de">Deutsch</option>
-              <option value="en">English</option>
-              <option value="zh">中文</option>
-              <option value="ja">日本語</option>
-            </select>
-          </div>
-          <div class="switcher-field">
-            <label for="numberFormatSelect" data-i18n="numberFormatLabel">Zahlenformat</label>
-            <select id="numberFormatSelect" aria-label="Zahlenformat auswählen" data-i18n-aria-label="numberFormatSelectAria">
-              <option value="auto" data-i18n="numberFormatAuto">Automatisch</option>
-              <option value="de">1.234,56</option>
-              <option value="en">1,234.56</option>
-              <option value="space">1 234,56</option>
-            </select>
-          </div>
+          <label for="languageSelect" data-i18n="languageLabel">Sprache</label>
+          <select id="languageSelect" aria-label="Sprache auswählen" data-i18n-aria-label="languageSelectAria">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+          </select>
         </div>
       </div>
     </header>
@@ -1245,20 +1228,11 @@
     if (!LANGUAGE_PACK) throw new Error("Missing i18n.js language pack.");
 
     const LANGUAGE_STORAGE_KEY = "germanMortgageCalculatorLanguageV1";
-    const NUMBER_FORMAT_STORAGE_KEY = "germanMortgageCalculatorNumberFormatV1";
     const SUPPORTED_LANGUAGES = LANGUAGE_PACK.supportedLanguages;
     const LOCALES = LANGUAGE_PACK.locales;
     const I18N = LANGUAGE_PACK.translations;
     const savedLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY);
     let currentLanguage = SUPPORTED_LANGUAGES.includes(savedLanguage) ? savedLanguage : "de";
-    const NUMBER_FORMATS = {
-      auto: { locale: null, group: null, decimal: null },
-      de: { locale: "de-DE", group: ".", decimal: "," },
-      en: { locale: "en-US", group: ",", decimal: "." },
-      space: { locale: "fr-FR", group: " ", decimal: "," }
-    };
-    const savedNumberFormatMode = localStorage.getItem(NUMBER_FORMAT_STORAGE_KEY);
-    let currentNumberFormatMode = Object.prototype.hasOwnProperty.call(NUMBER_FORMATS, savedNumberFormatMode) ? savedNumberFormatMode : "auto";
 
     function t(key, vars = {}) {
       const entry = I18N[key];
@@ -1280,8 +1254,6 @@
       });
       const selector = document.getElementById("languageSelect");
       if (selector) selector.value = currentLanguage;
-      const numberFormatSelector = document.getElementById("numberFormatSelect");
-      if (numberFormatSelector) numberFormatSelector.value = currentNumberFormatMode;
     }
 
     const GRUNDERWERBSTEUER_RATES = [
@@ -1371,7 +1343,7 @@
       "downloadCsv", "printPage", "targetLoanField", "purchaseEquityField",
       "immobilienCode", "bankangebotCode", "recordNote", "recordStatusBadge", "recordDisplayName", "recordSourceInfo", "recordModifiedInfo",
       "exportRecordJson", "importRecordJson", "newBlankRecord", "addCurrentToComparison", "recordImportFile",
-      "comparisonAddCurrent", "comparisonImportJson", "comparisonClear", "comparisonImportFiles", "languageSelect", "numberFormatSelect"
+      "comparisonAddCurrent", "comparisonImportJson", "comparisonClear", "comparisonImportFiles", "languageSelect"
     ];
 
     const el = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
@@ -1390,26 +1362,20 @@
     }
 
     function getNumberFormatConfig() {
-      const selected = NUMBER_FORMATS[currentNumberFormatMode] || NUMBER_FORMATS.auto;
-      const locale = selected.locale || getLocale();
-      if (selected.group && selected.decimal) return { ...selected, locale };
+      const locale = getLocale();
       const parts = new Intl.NumberFormat(locale).formatToParts(1234.5);
       return {
         locale,
-        group: parts.find((part) => part.type === "group")?.value || ",",
+        group: " ",
         decimal: parts.find((part) => part.type === "decimal")?.value || "."
       };
-    }
-
-    function getNumberLocale() {
-      return getNumberFormatConfig().locale;
     }
 
     function parseLocalizedNumber(value, fallback = 0) {
       if (typeof value === "number") return Number.isFinite(value) ? value : fallback;
       let text = String(value ?? "").trim();
       if (!text) return fallback;
-      const { group, decimal } = getNumberFormatConfig();
+      const { decimal } = getNumberFormatConfig();
       text = text.replace(/[€%]/g, "").replace(/[\u00a0\u202f]/g, " ").trim();
       const negative = /^-/.test(text);
       text = text.replace(/[^0-9.,'\s-]/g, "").replace(/-/g, "");
@@ -1424,8 +1390,7 @@
         const alternativeIndex = Math.max(dot, comma);
         if (alternativeIndex >= 0) {
           const tail = text.slice(alternativeIndex + 1).replace(/\D/g, "");
-          const separator = text[alternativeIndex];
-          const looksLikeGroup = separator === group && tail.length === 3 && /\d/.test(text.slice(0, alternativeIndex));
+          const looksLikeGroup = tail.length > 2 && /\d/.test(text.slice(0, alternativeIndex));
           if (!looksLikeGroup) decimalIndex = alternativeIndex;
         }
       }
@@ -1445,19 +1410,44 @@
       return Math.min(Math.max(value, min), max);
     }
 
+    function formatPlainNumber(value, options = {}) {
+      const clean = Number.isFinite(value) ? value : 0;
+      const { decimal } = getNumberFormatConfig();
+      const text = new Intl.NumberFormat(getLocale(), {
+        useGrouping: false,
+        minimumFractionDigits: options.minimumFractionDigits ?? 0,
+        maximumFractionDigits: options.maximumFractionDigits ?? 2
+      }).format(clean);
+      const [integerPart, fractionPart] = text.split(decimal);
+      return `${groupIntegerDigits(integerPart)}${fractionPart !== undefined ? `${decimal}${fractionPart}` : ""}`;
+    }
+
     function formatMoney(value, cents = false) {
       const clean = Number.isFinite(value) ? value : 0;
-      return new Intl.NumberFormat(getNumberLocale(), {
+      const numberText = formatPlainNumber(clean, {
+        minimumFractionDigits: cents ? 2 : 0,
+        maximumFractionDigits: cents ? 2 : 0
+      });
+      let inserted = false;
+      return new Intl.NumberFormat(getLocale(), {
         style: "currency",
         currency: "EUR",
         minimumFractionDigits: cents ? 2 : 0,
-        maximumFractionDigits: cents ? 2 : 0
-      }).format(clean);
+        maximumFractionDigits: cents ? 2 : 0,
+        useGrouping: false
+      }).formatToParts(clean).map((part) => {
+        if (["integer", "group", "decimal", "fraction"].includes(part.type)) {
+          if (inserted) return "";
+          inserted = true;
+          return numberText;
+        }
+        return part.value;
+      }).join("");
     }
 
     function formatPercent(value) {
       const clean = Number.isFinite(value) ? value : 0;
-      return `${new Intl.NumberFormat(getNumberLocale(), { maximumFractionDigits: 2 }).format(clean)} %`;
+      return `${formatPlainNumber(clean, { maximumFractionDigits: 2 })} %`;
     }
 
     function formatMonths(months) {
@@ -1481,7 +1471,7 @@
     }
 
     function splitNumberInputText(value, allowDecimal = true) {
-      const { group, decimal } = getNumberFormatConfig();
+      const { decimal } = getNumberFormatConfig();
       let text = String(value ?? "").replace(/[€%]/g, "").replace(/[\u00a0\u202f]/g, " ").trim();
       const negative = /^-/.test(text);
       text = text.replace(/[^0-9.,'\s-]/g, "").replace(/-/g, "");
@@ -1497,8 +1487,7 @@
         const alternativeIndex = Math.max(dot, comma);
         if (alternativeIndex >= 0) {
           const tail = text.slice(alternativeIndex + 1).replace(/\D/g, "");
-          const separator = text[alternativeIndex];
-          const looksLikeGroup = separator === group && tail.length === 3 && /\d/.test(text.slice(0, alternativeIndex));
+          const looksLikeGroup = tail.length > 2 && /\d/.test(text.slice(0, alternativeIndex));
           if (!looksLikeGroup) decimalIndex = alternativeIndex;
         }
       }
@@ -1909,7 +1898,7 @@
     function captureDefaultFormState() {
       const fields = {};
       document.querySelectorAll("input, select").forEach((node) => {
-        if (node.type === "file" || node.id === "languageSelect" || node.id === "numberFormatSelect") return;
+        if (node.type === "file" || node.id === "languageSelect") return;
         const key = node.type === "radio" ? `${node.name}:${node.value}` : node.id || node.name || node.value;
         fields[key] = {
           value: isNumberInput(node) && String(node.value).trim() ? safeNumber(node.value, 0) : node.value,
@@ -1925,7 +1914,7 @@
       if (!defaultFormState) return;
       state.isLoadingRecord = true;
       document.querySelectorAll("input, select").forEach((node) => {
-        if (node.type === "file" || node.id === "languageSelect" || node.id === "numberFormatSelect") return;
+        if (node.type === "file" || node.id === "languageSelect") return;
         const key = node.type === "radio" ? `${node.name}:${node.value}` : node.id || node.name || node.value;
         const defaults = defaultFormState[key];
         if (!defaults) return;
@@ -3133,7 +3122,7 @@
     }
 
     document.querySelectorAll("input, select").forEach((node) => {
-      if (node.type === "file" || node.id === "languageSelect" || node.id === "numberFormatSelect") return;
+      if (node.type === "file" || node.id === "languageSelect") return;
       node.addEventListener("input", () => {
         if (isNumberInput(node)) formatNumberInput(node, { editing: true });
         state.warningsEnabled = true;
@@ -3207,18 +3196,6 @@
       renderComparisonBasket();
       recalculate();
     });
-    el.numberFormatSelect.addEventListener("change", () => {
-      const numericValues = captureNumberInputValues();
-      currentNumberFormatMode = Object.prototype.hasOwnProperty.call(NUMBER_FORMATS, el.numberFormatSelect.value) ? el.numberFormatSelect.value : "auto";
-      localStorage.setItem(NUMBER_FORMAT_STORAGE_KEY, currentNumberFormatMode);
-      populateGrunderwerbsteuerOptions();
-      applyStaticTranslations();
-      restoreNumberInputValues(numericValues);
-      renderRecordStatus();
-      renderComparisonBasket();
-      recalculate();
-    });
-
     populateGrunderwerbsteuerOptions();
     applyStaticTranslations();
     formatAllNumberInputs();

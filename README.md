@@ -11,7 +11,7 @@ Dieses Tool ersetzt keine Finanzierungsberatung, keine Steuerberatung, keine Rec
 ## Verwendung
 
 1. Öffne `index.html` direkt im Browser.
-2. Wähle oben rechts die Sprache und das Zahlenformat, zum Beispiel `1.234,56`, `1,234.56` oder `1 234,56`.
+2. Wähle oben rechts die Sprache. Zahlen verwenden Leerzeichen als Tausendertrennzeichen; das Dezimalzeichen folgt der gewählten Sprache, zum Beispiel `1 234,56` auf Deutsch oder `1 234.56` auf Englisch.
 3. Trage Kaufpreis, gewünschtes Bankdarlehen oder eingesetztes Eigenkapital sowie aktuelle liquide Mittel ein.
 4. Prüfe und passe Kaufnebenkosten wie Grunderwerbsteuer, Notar/Grundbuch, Makler und fixe Zusatzkosten an.
 5. Trage Sollzins, Tilgung, Zinsbindung und Simulationsdauer ein.
