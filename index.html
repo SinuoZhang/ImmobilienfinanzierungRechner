@@ -1,0 +1,2873 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Immobilienfinanzierung Rechner Düsseldorf / NRW</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f4f6f5;
+      --card: #ffffff;
+      --card-soft: #f9fbfa;
+      --border: #dce3df;
+      --muted: #66736e;
+      --text: #17211e;
+      --accent: #28675e;
+      --accent-strong: #17352f;
+      --accent-soft: #e8f1ef;
+      --warning: #8a5b00;
+      --warning-bg: #fff7dd;
+      --danger: #a33333;
+      --danger-bg: #fff0ef;
+      --ok: #257653;
+      --ok-bg: #edf8f1;
+      --shadow: 0 14px 36px rgba(20, 32, 28, 0.08);
+      --radius: 18px;
+      --page-max: 1760px;
+      --gap: 18px;
+      --card-radius: 18px;
+      --card-padding: 18px;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, rgba(40, 103, 94, 0.08), transparent 440px), var(--background);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(var(--page-max), calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 34px 0 54px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .language-switcher {
+      display: grid;
+      gap: 5px;
+      min-width: 156px;
+      margin-left: auto;
+    }
+
+    .language-switcher label {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 850;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.15rem, 5vw, 4.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      max-width: 820px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      color: #33423d;
+      padding: 7px 11px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding: var(--card-padding);
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-copy {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .eyebrow {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .metric span, .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 780;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .metric small, .mini-metric small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .summary-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      min-width: 0;
+      background: var(--card-soft);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 13px;
+    }
+
+    .metric strong, .mini-metric strong {
+      display: block;
+      margin-top: 5px;
+      font-size: clamp(1.05rem, 1.5vw, 1.42rem);
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+      overflow-wrap: anywhere;
+    }
+
+    .overview-section { margin-bottom: var(--gap); }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .overview-major-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .overview-card {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fff, #fbfcfb);
+      padding: 16px;
+    }
+
+    .overview-card.highlight-cash { border-color: rgba(40, 103, 94, 0.26); background: linear-gradient(180deg, #fff, #f2f8f6); }
+    .overview-card.highlight-loan { border-color: rgba(79, 111, 159, 0.24); background: linear-gradient(180deg, #fff, #f4f7fc); }
+    .overview-card.highlight-cost { border-color: rgba(189, 125, 61, 0.26); background: linear-gradient(180deg, #fff, #fff8ef); }
+
+    .overview-card span, .metric-chip span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 820;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .overview-card strong {
+      display: block;
+      margin-top: 7px;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      overflow-wrap: anywhere;
+    }
+
+    .overview-lines {
+      display: grid;
+      gap: 4px;
+      margin-top: 10px;
+      color: #3a4742;
+      font-size: 0.88rem;
+    }
+
+    .overview-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(220, 227, 223, 0.8);
+      padding-top: 5px;
+    }
+
+    .overview-line b { text-align: right; overflow-wrap: anywhere; }
+
+    .repayment-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-chip {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--card-soft);
+      padding: 10px;
+    }
+
+    .metric-chip strong {
+      display: block;
+      margin-top: 4px;
+      font-size: clamp(1rem, 1.25vw, 1.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      overflow-wrap: anywhere;
+    }
+
+    .metric-chip small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .warnings {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .warnings:empty { display: none; }
+
+    .warning {
+      border: 1px solid rgba(138, 91, 0, 0.28);
+      border-radius: 14px;
+      background: var(--warning-bg);
+      color: var(--warning);
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .warning::before { content: "Hinweis: "; font-weight: 900; }
+    html[lang="en"] .warning::before { content: "Note: "; }
+    html[lang="zh-CN"] .warning::before { content: "提示："; }
+    .warning.danger { background: var(--danger-bg); color: var(--danger); border-color: rgba(163, 51, 51, 0.28); }
+    .warning.danger::before { content: "Warnung: "; }
+    html[lang="en"] .warning.danger::before { content: "Warning: "; }
+    html[lang="zh-CN"] .warning.danger::before { content: "警告："; }
+    .warning.ok { background: var(--ok-bg); color: var(--ok); border-color: rgba(37, 118, 83, 0.24); }
+    .warning.ok::before { content: "OK: "; }
+
+    .record-card { margin-bottom: var(--gap); }
+
+    .record-toolbar {
+      display: grid;
+      grid-template-columns: minmax(140px, 1fr) minmax(180px, 1fr) minmax(180px, 1.25fr) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .record-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .record-status-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      align-items: center;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #eef2f0;
+      color: var(--accent-strong);
+      padding: 5px 10px;
+      font-weight: 850;
+    }
+
+    .status-badge.modified { background: var(--warning-bg); color: var(--warning); border-color: rgba(138, 91, 0, 0.28); }
+    .status-badge.saved { background: var(--ok-bg); color: var(--ok); border-color: rgba(37, 118, 83, 0.24); }
+    .status-badge.loaded { background: #eef3fb; color: #30517c; border-color: rgba(79, 111, 159, 0.24); }
+
+    .comparison-shell { overflow: auto; border: 1px solid var(--border); border-radius: 14px; background: #fff; }
+
+    .comparison-table {
+      width: max-content;
+      min-width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+    }
+
+    .comparison-table th, .comparison-table td {
+      min-width: 180px;
+      max-width: 240px;
+      padding: 10px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      white-space: normal;
+      overflow-wrap: anywhere;
+      text-align: right;
+    }
+
+    .comparison-table th:first-child, .comparison-table td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      min-width: 210px;
+      text-align: left;
+      background: #f7faf8;
+      font-weight: 850;
+    }
+
+    .comparison-table th { top: 0; z-index: 3; background: #eef2f0; color: var(--accent-strong); }
+    .comparison-table th:first-child { z-index: 4; background: #e7eeea; }
+    .comparison-table tr:last-child td { border-bottom: 0; }
+    .comparison-table th:last-child, .comparison-table td:last-child { border-right: 0; }
+
+    .comparison-record-head { display: grid; gap: 6px; text-align: left; }
+    .comparison-record-head strong { font-size: 0.92rem; color: #21322d; }
+    .comparison-record-head small { color: var(--muted); font-weight: 650; }
+    .comparison-record-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .comparison-record-actions button { padding: 6px 8px; font-size: 0.74rem; }
+
+    .planning-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: var(--gap);
+      align-items: stretch;
+      margin-bottom: var(--gap);
+    }
+
+    .planning-grid > .card {
+      height: 100%;
+    }
+
+    .card-equity, .card-costs, .card-loan { grid-column: span 4; }
+    .card-sonder, .card-early { grid-column: span 6; }
+    .section-wide { margin-bottom: var(--gap); }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field-grid { display: grid; gap: 12px; }
+    .field-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .field-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .card-equity .field:not(.full) {
+      grid-template-rows: auto 42px minmax(2.4em, auto);
+      align-items: start;
+    }
+
+    .card-equity .input-shell,
+    .card-equity .input-shell input {
+      min-height: 42px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+    .field-grid > .full { grid-column: 1 / -1; }
+
+    label {
+      color: #23312d;
+      font-size: 0.88rem;
+      font-weight: 780;
+      line-height: 1.3;
+    }
+
+    .helper {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.42;
+    }
+
+    input, select, button { font: inherit; }
+
+    input, select {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #ccd7d2;
+      border-radius: 11px;
+      background: #fff;
+      color: var(--text);
+      padding: 9px 11px;
+      outline: none;
+      transition: border 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
+    }
+
+    input[readonly] { background: #f0f4f2; color: #66736e; }
+
+    input:focus, select:focus, button:focus-visible, summary:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(40, 103, 94, 0.16);
+      outline: none;
+    }
+
+    .input-shell { position: relative; }
+    .input-shell input { padding-right: 62px; }
+
+    .suffix {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    .segmented, .calc-mode {
+      display: grid;
+      gap: 7px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card-soft);
+      padding: 8px;
+    }
+
+    .radio {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      padding: 8px;
+      color: #2f3d38;
+      font-size: 0.84rem;
+      font-weight: 650;
+    }
+
+    .radio input, .toggle-line input {
+      width: 18px;
+      height: 18px;
+      min-height: 0;
+      margin-top: 1px;
+      accent-color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .toggle-line {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    button {
+      min-height: 41px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--accent-strong);
+      color: #fff;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    button:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(20, 32, 28, 0.12); }
+    button.secondary { background: #e7eeeb; color: var(--accent-strong); }
+    button.accent { background: var(--accent); }
+
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .below-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+      align-items: start;
+      margin-bottom: var(--gap);
+    }
+
+    .kapitalfluss {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .flow-row {
+      display: flex;
+      flex: 1 1 210px;
+      gap: 10px;
+      align-items: baseline;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--card-soft);
+      padding: 10px 12px;
+    }
+
+    .flow-row .op {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .flow-row strong { margin-left: auto; white-space: nowrap; }
+    .flow-row.total { background: var(--accent-soft); border-color: rgba(40, 103, 94, 0.22); }
+
+    .computed-grid, .result-grid, .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .structure-results .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .compact-output { margin-top: 12px; }
+
+    .mini-metric {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--card-soft);
+      padding: 12px;
+      min-width: 0;
+    }
+
+    #costComputed { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .mini-metric.warning-metric {
+      border-color: rgba(138, 91, 0, 0.32);
+      background: var(--warning-bg);
+    }
+
+    .mini-metric.warning-metric span,
+    .mini-metric.warning-metric small {
+      color: var(--warning);
+    }
+
+    .bar-wrap {
+      margin-top: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .stacked-bar {
+      display: flex;
+      height: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #eef2f0;
+    }
+
+    .bar-part { min-width: 2px; }
+    .bar-principal { background: #2f7d6f; }
+    .bar-interest { background: #bd7d3d; }
+    .bar-special { background: #4f6f9f; }
+    .bar-penalty { background: #a33333; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .legend-item { display: inline-flex; gap: 6px; align-items: center; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .comparison-grid div {
+      min-height: 42px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      overflow-wrap: anywhere;
+      font-size: 0.9rem;
+    }
+
+    .comparison-grid div:nth-child(3n) { border-right: 0; }
+    .comparison-grid div:nth-last-child(-n + 3) { border-bottom: 0; }
+    .comparison-grid .head { background: #eef2f0; font-weight: 850; color: var(--accent-strong); }
+
+    .table-section { margin-top: 0; margin-bottom: var(--gap); }
+    .table-wrap { overflow: auto; max-height: 740px; border: 1px solid var(--border); border-radius: 15px; background: #fff; }
+    table { border-collapse: collapse; width: 100%; min-width: 1080px; table-layout: fixed; font-size: 0.84rem; }
+    th, td { padding: 10px 11px; border-bottom: 1px solid #e8eeeb; white-space: nowrap; vertical-align: top; text-align: right; }
+    th { position: sticky; top: 0; z-index: 1; background: #eef2f0; color: #26342f; font-size: 0.72rem; letter-spacing: 0.02em; text-transform: none; white-space: normal; overflow-wrap: normal; line-height: 1.22; }
+    th .th-title, th .th-subtitle { display: block; }
+    th .th-title { font-weight: 850; }
+    th .th-subtitle { margin-top: 2px; color: var(--muted); font-size: 0.7rem; font-weight: 750; }
+    th:nth-child(1) { width: 5.5%; }
+    th:nth-child(2), th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6), th:nth-child(7), th:nth-child(8) { width: 10.5%; }
+    th:nth-child(9) { width: 21%; }
+    th.year, td.year { text-align: center; }
+    th.notes, td.notes { text-align: left; white-space: normal; overflow-wrap: anywhere; }
+    tbody tr:nth-child(even) td { background: #fbfcfb; }
+    tbody tr.milestone-fixed td { background: #f8f5ec; }
+    tbody tr.milestone-paid td { background: #eef8f2; font-weight: 750; }
+    tbody tr.milestone-early td { background: #fff7ed; font-weight: 750; }
+    tbody tr.milestone-combined td { background: #f4f3eb; font-weight: 750; }
+
+    .note-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: #eef2f0;
+      color: #2f403a;
+      font-size: 0.76rem;
+      font-weight: 800;
+      margin-right: 4px;
+    }
+
+    .explain {
+      margin-top: 18px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 20px;
+      font-weight: 850;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--accent); font-size: 1.2rem; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+
+    .explain-content { display: grid; gap: 14px; padding: 0 20px 20px; }
+    .explain-item { border-top: 1px solid var(--border); padding-top: 14px; }
+    .explain-item h3 { margin: 0 0 5px; font-size: 1rem; }
+    .explain-item p { margin: 0; color: #34413c; }
+
+    .disclaimer {
+      margin-top: 18px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.88rem;
+    }
+
+    .hidden { display: none !important; }
+    .mono { font-family: var(--mono); }
+
+    @media (min-width: 1500px) {
+      .summary-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .structure-results .metric-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+      .result-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .repayment-metric-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 1399px) {
+      .summary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .planning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card-equity, .card-costs, .card-loan, .card-sonder, .card-early, .card-flow { grid-column: span 1; }
+      .structure-results .metric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .overview-major-grid { grid-template-columns: 1fr; }
+      .repayment-metric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .page { width: min(100% - 24px, var(--page-max)); padding-top: 22px; }
+      .hero-top { display: grid; }
+      .language-switcher { width: 100%; }
+      .summary-grid, .planning-grid, .form-grid, .field-grid.two, .field-grid.three, .computed-grid, .result-grid, .metric-grid, .structure-results .metric-grid, .overview-major-grid, .repayment-metric-grid, .record-toolbar { grid-template-columns: 1fr; }
+      .card-equity, .card-costs, .card-loan, .card-sonder, .card-early, .card-flow { grid-column: auto; }
+      .card { padding: 18px; border-radius: 16px; }
+      .card-header { display: grid; }
+      .row-actions button { width: 100%; }
+      .record-actions { justify-content: stretch; }
+      .record-actions button { flex: 1 1 160px; }
+      .flow-row { flex-basis: 100%; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; padding: 0; }
+      .card { box-shadow: none; break-inside: avoid; }
+      button { display: none; }
+      .table-wrap { max-height: none; overflow: visible; }
+      th { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+        <h1 data-i18n="heroTitle">Immobilienfinanzierung Rechner</h1>
+        <p class="subtitle" data-i18n="heroSubtitle">Annuitätendarlehen, Kaufnebenkosten, Eigenkapital-Strategie, Sondertilgung und Vorfälligkeitsentschädigung für Düsseldorf / NRW.</p>
+        <div class="badges">
+          <span class="badge" data-i18n="badgeTax">NRW Grunderwerbsteuer 6,5%</span>
+          <span class="badge" data-i18n="badgeCosts">Kaufnebenkosten separat</span>
+          <span class="badge" data-i18n="badgePenalty">Vorfälligkeit nur als grobe Simulation</span>
+        </div>
+        </div>
+        <div class="language-switcher">
+          <label for="languageSelect" data-i18n="languageLabel">Sprache</label>
+          <select id="languageSelect" aria-label="Sprache auswählen">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <section class="warnings" id="warnings" aria-live="polite"></section>
+
+    <section class="card record-card" aria-live="polite">
+      <div class="card-header">
+        <div>
+          <span class="eyebrow" data-i18n="recordEyebrow">Datensatz</span>
+          <h2 class="section-title" data-i18n="recordTitle">Datensatz</h2>
+          <p class="section-copy" data-i18n="recordCopy">Speichern, laden und vergleichen vollständiger Finanzierungsvarianten.</p>
+        </div>
+      </div>
+      <div class="record-toolbar">
+        <div class="field">
+          <label for="immobilienCode" data-i18n="propertyCodeLabel">Immobilien-Code</label>
+          <input id="immobilienCode" type="text" placeholder="AD80-DG" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="bankangebotCode" data-i18n="bankOfferCodeLabel">Bankangebot-Code</label>
+          <input id="bankangebotCode" type="text" placeholder="SPK-2026-07-A" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="recordNote" data-i18n="recordNoteLabel">Notiz</label>
+          <input id="recordNote" type="text" placeholder="z. B. 10J Sollzins offer" data-i18n-placeholder="recordNotePlaceholder" autocomplete="off">
+        </div>
+        <div class="record-actions">
+          <button type="button" id="exportRecordJson" data-i18n="exportJsonButton">Als JSON speichern</button>
+          <button type="button" id="importRecordJson" class="secondary" data-i18n="importJsonButton">JSON laden</button>
+          <button type="button" id="newBlankRecord" class="secondary" data-i18n="newBlankButton">Neuer leerer Datensatz</button>
+          <button type="button" id="addCurrentToComparison" class="accent" data-i18n="addToComparisonButton">Zur Vergleichstabelle hinzufügen</button>
+        </div>
+      </div>
+      <div class="record-status-line">
+        <span id="recordStatusBadge" class="status-badge">Leerer Datensatz</span>
+        <span><span data-i18n="recordNamePrefix">Name: </span><strong id="recordDisplayName">Unbenannt</strong></span>
+        <span id="recordSourceInfo">Keine Datei geladen</span>
+        <span id="recordModifiedInfo"></span>
+      </div>
+      <input id="recordImportFile" class="hidden" type="file" accept="application/json,.json">
+      <input id="comparisonImportFiles" class="hidden" type="file" accept="application/json,.json" multiple>
+    </section>
+
+    <main>
+      <section class="planning-grid">
+        <section class="card card-equity">
+          <div class="card-header">
+            <div>
+              <span class="eyebrow" data-i18n="capitalEyebrow">Kapital</span>
+              <h2 class="section-title" data-i18n="capitalTitle">1. Kaufpreis & Kapitalplanung</h2>
+              <p class="section-copy" data-i18n="capitalCopy">Kaufpreis, Darlehensbetrag, Eigenkapitalbedarf und Liquidität nach Kauf.</p>
+            </div>
+          </div>
+          <div class="field-grid">
+            <div class="field full">
+              <label data-i18n="capitalModeLabel">Kapital-Modus</label>
+              <div class="segmented">
+                <label class="radio"><input type="radio" name="equityMode" value="targetLoan" checked> <span data-i18n="capitalModeTargetLoan">Gewünschter Darlehensbetrag</span></label>
+                <label class="radio"><input type="radio" name="equityMode" value="purchaseEquity"> <span data-i18n="capitalModePurchaseEquity">Eigenkapital für Kauf</span></label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="purchasePrice" data-i18n="purchasePriceLabel">Kaufpreis</label>
+              <div class="input-shell"><input id="purchasePrice" type="number" min="0" step="1000" value="300000" inputmode="decimal"><span class="suffix">€</span></div>
+              <span class="helper" data-i18n="purchasePriceHelper">Kaufpreis ohne Kaufnebenkosten.</span>
+            </div>
+            <div class="field" id="targetLoanField">
+              <label for="targetLoanAmount" data-i18n="targetLoanLabel">Gewünschter Darlehensbetrag</label>
+              <div class="input-shell"><input id="targetLoanAmount" type="number" min="0" step="1000" value="200000" inputmode="decimal"><span class="suffix">€</span></div>
+              <span class="helper" data-i18n="targetLoanHelper">Wenn nur X € Bankdarlehen gewünscht sind, wird der nötige Eigenkapitalbedarf berechnet.</span>
+            </div>
+            <div class="field hidden" id="purchaseEquityField">
+              <label for="purchaseEquityBudget" data-i18n="purchaseEquityLabel">Für Kauf eingesetztes Eigenkapital</label>
+              <div class="input-shell"><input id="purchaseEquityBudget" type="number" min="0" step="1000" value="" placeholder="Eigenkapital eingeben" data-i18n-placeholder="purchaseEquityPlaceholder" inputmode="decimal"><span class="suffix">€</span></div>
+              <span class="helper" data-i18n="purchaseEquityHelper">Nicht das Gesamtvermögen, sondern der für diesen Kauf geplante Cash-Einsatz.</span>
+            </div>
+            <div class="field full">
+              <span class="eyebrow" data-i18n="liquidityEyebrow">Liquidität nach Kauf</span>
+            </div>
+            <div class="field">
+              <label for="liquidFundsTotal" data-i18n="liquidFundsLabel">Aktuelle liquide Mittel</label>
+              <div class="input-shell"><input id="liquidFundsTotal" type="number" min="0" step="1000" value="175000" inputmode="decimal"><span class="suffix">€</span></div>
+              <span class="helper" data-i18n="liquidFundsHelper">Muss nicht vollständig für diesen Kauf eingesetzt werden.</span>
+            </div>
+            <p id="capitalLiquidityLine" class="helper full"></p>
+          </div>
+        </section>
+
+        <section class="card card-costs">
+          <div class="card-header">
+            <div>
+              <span class="eyebrow" data-i18n="costsEyebrow">Nebenkosten</span>
+              <h2 class="section-title" data-i18n="costsTitle">2. Kaufnebenkosten</h2>
+              <p class="section-copy" data-i18n="costsCopy">NRW/Düsseldorf-Standardwerte, je nach Objekt anpassbar.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label class="toggle-line" for="advancedTax"><input id="advancedTax" type="checkbox"> <span data-i18n="advancedTaxLabel">Advanced: Grunderwerbsteuer editierbar. NRW-Standard ist 6,5%.</span></label>
+            </div>
+            <div class="field">
+              <label for="transferTaxRate" data-i18n="transferTaxLabel">Grunderwerbsteuer</label>
+              <div class="input-shell"><input id="transferTaxRate" type="number" min="0" step="0.01" value="6.5" readonly inputmode="decimal"><span class="suffix">%</span></div>
+            </div>
+            <div class="field">
+              <label for="notaryRate" data-i18n="notaryLabel">Notar + Grundbuch</label>
+              <div class="input-shell"><input id="notaryRate" type="number" min="0" step="0.01" value="2.0" inputmode="decimal"><span class="suffix">%</span></div>
+              <span class="helper" data-i18n="notaryHelper">Vereinfachte Schätzung, individuell anpassbar.</span>
+            </div>
+            <div class="field">
+              <label for="brokerPreset" data-i18n="brokerPresetLabel">Maklerprovision Preset</label>
+              <select id="brokerPreset">
+                <option value="0">0%</option>
+                <option value="1.785">1.785%</option>
+                <option value="3.57">3.57%</option>
+                <option value="3.75" selected>3.75%</option>
+                <option value="custom" data-i18n="optionCustom">Benutzerdefiniert</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="brokerRate" data-i18n="brokerLabel">Makler</label>
+              <div class="input-shell"><input id="brokerRate" type="number" min="0" step="0.001" value="3.75" readonly inputmode="decimal"><span class="suffix">%</span></div>
+            </div>
+            <div class="field full">
+              <label for="fixedExtraCosts" data-i18n="fixedExtraCostsLabel">Optionale fixe Zusatzkosten</label>
+              <div class="input-shell"><input id="fixedExtraCosts" type="number" min="0" step="100" value="0" inputmode="decimal"><span class="suffix">€</span></div>
+              <span class="helper" data-i18n="fixedExtraCostsHelper">Zum Beispiel Gutachter, Umzug oder kleinere Bankgebühren.</span>
+            </div>
+          </div>
+          <div id="costComputed" class="computed-grid compact-output"></div>
+        </section>
+
+        <section class="card card-loan">
+          <div class="card-header">
+            <div>
+              <span class="eyebrow" data-i18n="loanEyebrow">Darlehen</span>
+              <h2 class="section-title" data-i18n="loanTitle">3. Darlehen & Monatsrate</h2>
+              <p class="section-copy" data-i18n="loanCopy">Der Sollzins kommt vom Bankangebot. Du kannst die Tilgung festlegen oder eine gewünschte Monatsrate testen.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label data-i18n="loanCalcModeLabel">Berechnungsmodus: automatisch abgeleitetes Feld wählen</label>
+              <div class="calc-mode">
+                <label class="radio"><input type="radio" name="calcMode" value="rateFromTilgung" checked> <span data-i18n="calcModeRateLabel">A. Sollzins + anfängliche Tilgung → Monatsrate</span><br><span class="helper" data-i18n="calcModeRateHelper">Die Bank gibt den Zins vor; ich setze die Tilgung und berechne die Monatsrate.</span></label>
+                <label class="radio"><input type="radio" name="calcMode" value="tilgungFromRate"> <span data-i18n="calcModeTilgungLabel">B. Sollzins + gewünschte Monatsrate → Tilgung</span><br><span class="helper" data-i18n="calcModeTilgungHelper">Die Bank gibt den Zins vor; ich setze die tragbare Monatsrate und berechne die Tilgung.</span></label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="interestRate" data-i18n="interestRateLabel">Sollzins p.a.</label>
+              <div class="input-shell"><input id="interestRate" type="number" min="0" step="0.01" value="4.0" inputmode="decimal"><span class="suffix">%</span></div>
+              <span class="helper" data-i18n="interestRateHelper">Aus dem Bankangebot, z. B. 3,8-4,2%.</span>
+            </div>
+            <div class="field" id="tilgungField">
+              <label for="initialTilgung" data-i18n="initialTilgungLabel">Anfängliche Tilgung p.a.</label>
+              <div class="input-shell"><input id="initialTilgung" type="number" min="0" step="0.01" value="1.5" inputmode="decimal"><span class="suffix">%</span></div>
+              <span class="helper" data-i18n="initialTilgungHelper">Tilgung% definiert die anfängliche Annuität, nicht einen festen Tilgungsbetrag.</span>
+            </div>
+            <div class="field" id="monthlyRateField">
+              <label for="monthlyRate" data-i18n="monthlyRateLabel">Gewünschte Monatsrate</label>
+              <div class="input-shell"><input id="monthlyRate" type="number" min="0" step="10" value="0" inputmode="decimal"><span class="suffix">€</span></div>
+            </div>
+            <div class="field full">
+              <div id="loanDerivedResult" class="mini-metric"></div>
+            </div>
+            <div class="field">
+              <label for="fixedYears" data-i18n="fixedYearsLabel">Zinsbindung</label>
+              <div class="input-shell"><input id="fixedYears" type="number" min="1" step="1" value="10" inputmode="numeric"><span class="suffix">Jahre</span></div>
+            </div>
+            <div class="field">
+              <label for="simulationYears" data-i18n="simulationYearsLabel">Simulationsdauer</label>
+              <div class="input-shell"><input id="simulationYears" type="number" min="1" max="80" step="1" value="30" inputmode="numeric"><span class="suffix">Jahre</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card-sonder">
+          <div class="card-header">
+            <div>
+              <span class="eyebrow" data-i18n="sonderEyebrow">Flexibilität</span>
+              <h2 class="section-title" data-i18n="sonderTitle">4. Sondertilgung</h2>
+              <p class="section-copy" data-i18n="sonderCopy">Simulationseinstellungen für jährliche Sondertilgungen.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="specialOption" data-i18n="specialOptionLabel">Sondertilgung</label>
+              <select id="specialOption">
+                <option value="none" data-i18n="specialNone">Keine</option>
+                <option value="5" data-i18n="specialFive">5% p.a. des anfänglichen Darlehensbetrags</option>
+                <option value="10" data-i18n="specialTen">10% p.a. des anfänglichen Darlehensbetrags</option>
+                <option value="custom" data-i18n="specialCustom">Benutzerdefinierter Jahresbetrag</option>
+              </select>
+              <span class="helper" data-i18n="specialOptionHelper">Simulation pro Jahr, abhängig vom Bankvertrag.</span>
+            </div>
+            <div class="field">
+              <label for="specialCustomAmount" data-i18n="specialCustomAmountLabel">Benutzerdefinierte Sondertilgung</label>
+              <div class="input-shell"><input id="specialCustomAmount" type="number" min="0" step="100" value="0" inputmode="decimal"><span class="suffix" data-i18n="perYearSuffix">€/Jahr</span></div>
+            </div>
+            <div class="field">
+              <label for="specialMonth" data-i18n="specialMonthLabel">Ausführungsmonat</label>
+              <input id="specialMonth" type="number" min="1" max="12" step="1" value="12" inputmode="numeric">
+            </div>
+          </div>
+          <div id="sonderComputed" class="computed-grid compact-output"></div>
+        </section>
+
+        <section class="card card-early">
+          <div class="card-header">
+            <div>
+              <span class="eyebrow" data-i18n="earlyEyebrow">Ablösung</span>
+              <h2 class="section-title" data-i18n="earlyTitle">5. Vorzeitige Ablösung</h2>
+              <p class="section-copy" data-i18n="earlyCopy">Grobe Simulation für vorzeitige Rückzahlung und Vorfälligkeitsentschädigung.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label class="toggle-line" for="earlyEnabled"><input id="earlyEnabled" type="checkbox"> <span data-i18n="earlyEnabledLabel">Vorzeitige Ablösung simulieren</span></label>
+            </div>
+            <div class="field">
+              <label for="earlyYear" data-i18n="earlyYearLabel">Ablösejahr</label>
+              <div class="input-shell"><input id="earlyYear" type="number" min="1" step="1" value="5" inputmode="numeric"><span class="suffix">Jahr</span></div>
+              <span class="helper" data-i18n="earlyYearHelper">Am Jahresende wird die verbleibende Restschuld auf einmal abgelöst.</span>
+            </div>
+            <div class="field">
+              <label for="penaltyMode" data-i18n="penaltyModeLabel">Vorfälligkeitsentschädigung Modell</label>
+              <select id="penaltyMode">
+                <option value="none" data-i18n="penaltyNone">Keine Entschädigung / 0%</option>
+                <option value="pct1" data-i18n="penaltyPct1">Niedriges Stressszenario / 1% der Restschuld</option>
+                <option value="pct2" selected data-i18n="penaltyPct2">Mittleres Stressszenario / 2% der Restschuld</option>
+                <option value="pct4" data-i18n="penaltyPct4">Höheres Stressszenario / 4% der Restschuld</option>
+                <option value="pct8" data-i18n="penaltyPct8">Hohes Stressszenario / 8% der Restschuld</option>
+                <option value="pct10" data-i18n="penaltyPct10">Sehr hohes Stressszenario / 10% der Restschuld</option>
+                <option value="customPct" data-i18n="penaltyCustomPct">Benutzerdefinierter Prozentsatz der Restschuld</option>
+                <option value="fixed" data-i18n="penaltyFixed">Fixer Entschädigungsbetrag</option>
+              </select>
+              <span class="helper" data-i18n="penaltyModeHelper">Nur grobe Szenario-Rechnung. Die echte Vorfälligkeitsentschädigung wird von der Bank nach Vertragsdaten, Restlaufzeit, Zinsumfeld und zulässiger Methode berechnet.</span>
+            </div>
+            <div class="field">
+              <label for="penaltyPercent" data-i18n="penaltyPercentLabel">Benutzerdefinierte Entschädigung</label>
+              <div class="input-shell"><input id="penaltyPercent" type="number" min="0" step="0.1" value="2" inputmode="decimal"><span class="suffix">%</span></div>
+            </div>
+            <div class="field">
+              <label for="fixedPenaltyAmount" data-i18n="fixedPenaltyLabel">Fixe Entschädigung</label>
+              <div class="input-shell"><input id="fixedPenaltyAmount" type="number" min="0" step="100" value="0" inputmode="decimal"><span class="suffix">€</span></div>
+            </div>
+          </div>
+          <div id="earlyCompact" class="computed-grid compact-output"></div>
+        </section>
+
+      </section>
+
+      <section class="card overview-section" aria-live="polite">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" data-i18n="overviewEyebrow">Übersicht</span>
+            <h2 class="section-title" data-i18n="overviewTitle">Finanzierungsübersicht</h2>
+            <p class="section-copy" data-i18n="overviewCopy">Gesamtüberblick über Kapitalstruktur und Rückzahlungsstrategie.</p>
+          </div>
+        </div>
+        <div id="overviewMajorGrid" class="overview-major-grid"></div>
+        <div id="repaymentMetricGrid" class="repayment-metric-grid"></div>
+        <div id="costBreakdownBar" class="bar-wrap"></div>
+      </section>
+
+      <section class="card table-section">
+        <div class="card-header">
+          <div>
+            <span class="eyebrow" data-i18n="amortizationEyebrow">Amortisation</span>
+            <h2 class="section-title" data-i18n="amortizationTitle">Jährliche Rückzahlungsdetails</h2>
+            <p class="section-copy" data-i18n="amortizationCopy">Jährliche Cashflow-Sicht: reguläre Zahlungen, Zinsen, Tilgung, Sondertilgung und Hinweise.</p>
+          </div>
+          <div class="row-actions">
+            <button type="button" id="downloadCsv" data-i18n="downloadCsvButton">CSV exportieren</button>
+            <button type="button" class="secondary" id="printPage" data-i18n="printButton">Drucken / PDF</button>
+          </div>
+        </div>
+        <section class="warnings" id="breakdownWarning" aria-live="polite"></section>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="year"><span class="th-title" data-i18n="tableYearTitle">Jahr</span><span class="th-subtitle" data-i18n="tableYearSubtitle">Jahr</span></th>
+                <th><span class="th-title" data-i18n="tableRegularTitle">Reguläre Zahlungen</span><span class="th-subtitle" data-i18n="tableRegularSubtitle">Summe Monatsraten</span></th>
+                <th><span class="th-title" data-i18n="tableInterestTitle">Zinsen im Jahr</span><span class="th-subtitle" data-i18n="tableInterestSubtitle">Jahreszins</span></th>
+                <th><span class="th-title" data-i18n="tablePrincipalTitle">Tilgung im Jahr</span><span class="th-subtitle" data-i18n="tablePrincipalSubtitle">Reguläre Tilgung</span></th>
+                <th><span class="th-title" data-i18n="tableSpecialTitle">Sondertilgung</span><span class="th-subtitle" data-i18n="tableSpecialSubtitle">Sonderzahlung</span></th>
+                <th><span class="th-title" data-i18n="tableCumPrincipalTitle">Kumulierte Tilgung</span><span class="th-subtitle" data-i18n="tableCumPrincipalSubtitle">Gesamttilgung</span></th>
+                <th><span class="th-title" data-i18n="tableCumInterestTitle">Kumulierte Zinsen</span><span class="th-subtitle" data-i18n="tableCumInterestSubtitle">Gesamtzinsen</span></th>
+                <th><span class="th-title" data-i18n="tableDebtTitle">Restschuld Jahresende</span><span class="th-subtitle" data-i18n="tableDebtSubtitle">Restschuld</span></th>
+                <th class="notes"><span class="th-title" data-i18n="tableNoteTitle">Hinweis</span><span class="th-subtitle" data-i18n="tableNoteSubtitle">Notiz</span></th>
+              </tr>
+            </thead>
+            <tbody id="breakdownBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card section-wide">
+        <div class="card-header">
+          <div>
+            <span class="eyebrow" data-i18n="comparisonEyebrow">Vergleich</span>
+            <h2 class="section-title" data-i18n="comparisonTitle">Vergleich</h2>
+            <p class="section-copy" data-i18n="comparisonCopy">Aktuellen Datensatz oder gespeicherte JSON-Dateien vergleichen. Die Tabelle wird lokal im Browser gespeichert und kann jederzeit geleert werden.</p>
+          </div>
+          <div class="row-actions">
+            <button type="button" id="comparisonAddCurrent" data-i18n="comparisonAddCurrentButton">Aktuellen Datensatz vergleichen</button>
+            <button type="button" id="comparisonImportJson" class="secondary" data-i18n="comparisonImportButton">JSON in Vergleich importieren</button>
+            <button type="button" id="comparisonClear" class="secondary" data-i18n="comparisonClearButton">Vergleich leeren</button>
+          </div>
+        </div>
+        <div id="comparison" class="comparison-shell"></div>
+      </section>
+    </main>
+
+    <section class="card explain">
+      <details>
+        <summary data-i18n="explainSummary">Berechnungslogik</summary>
+        <div class="explain-content">
+          <article class="explain-item"><h3 data-i18n="explainCostsTitle">Kaufnebenkosten in NRW/Düsseldorf</h3><p data-i18n="explainCostsText">Die Grunderwerbsteuer in NRW beträgt 6,5% des Kaufpreises. Notar + Grundbuch werden separat geschätzt, hier standardmäßig mit 2,0%. Die Maklerprovision hängt von Objekt und Vertrag ab und bleibt daher editierbar.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainEquityTitle">Warum Kaufnebenkosten meist aus Eigenkapital gezahlt werden</h3><p data-i18n="explainEquityText">Banken finanzieren üblicherweise eher den Immobilienwert selbst als die Kaufnebenkosten. Deshalb trennt der Rechner Kaufnebenkosten und Eigenkapital für Bank. Eigenkapitalbedarf für Kauf = Kaufnebenkosten + Eigenkapital für Bank.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainCapitalTitle">Kapitalplanung und Liquidität</h3><p data-i18n="explainCapitalText">Du kannst vom gewünschten Bankdarlehen oder vom maximal geplanten Eigenkapital für den Kauf ausgehen. Kaufnebenkosten müssen typischerweise bar bezahlt werden; das Bankdarlehen bezieht sich meistens auf den Immobilienwert. Bei Ziel-Darlehen gilt: Eigenkapitalbedarf für Kauf = Kaufnebenkosten + Kaufpreis - gewünschter Darlehensbetrag. Liquidität nach Kauf = aktuelle liquide Mittel - Eigenkapitalbedarf für Kauf.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainRecordTitle">Datensatz / JSON</h3><p data-i18n="explainRecordText">Jeder Datensatz speichert Eingaben, Metadaten und einen Berechnungssnapshot. Beim erneuten Laden ist inputState maßgeblich; calculatedSnapshot dient nur zur schnellen Prüfung und zum Vergleich. Die Vergleichstabelle liegt im localStorage dieses Browsers und kann geleert werden.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainAnnuityTitle">Annuitätendarlehen</h3><p data-i18n="explainAnnuityText">Während der Zinsbindung bleibt die Monatsrate üblicherweise konstant. Mit sinkender Restschuld fällt der Zinsanteil, während der Tilgungsanteil steigt.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainTableTitle">Jährliche Rückzahlungstabelle</h3><p data-i18n="explainTableText">„Tilgung im Jahr“ ist der Teil der regulären Monatsraten, der die Restschuld reduziert, ohne Zinsen und ohne Sondertilgung. „Sondertilgung“ wird separat gezeigt. „Kumulierte Tilgung“ enthält reguläre Tilgung und Sondertilgung. „Restschuld Jahresende“ zeigt die verbleibende Schuld nach allen Zahlungen im Jahr. Vorfälligkeitsentschädigung erscheint bei simulierter Ablösung in den Hinweisen.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainTilgungTitle">Anfängliche Tilgung</h3><p data-i18n="explainTilgungText">Tilgung% ist kein fixer monatlicher Tilgungsbetrag, sondern definiert zusammen mit dem Sollzins die anfängliche Annuität. Formel: Jahresrate = Darlehensbetrag × (Sollzins% + Tilgung%) / 100.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainPlanningTitle">Sollzins und Monatsrate in der Planung</h3><p data-i18n="explainPlanningText">Bei deutschen Immobilienkrediten kommt der Sollzins üblicherweise aus dem Bankangebot. Praktisch entscheidest du dann über die Tilgung oder leitest die passende Tilgung aus einer tragbaren Monatsrate ab.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainSpecialTitle">Sondertilgung</h3><p data-i18n="explainSpecialText">Sondertilgungen reduzieren die Restschuld schneller. Vertraglich zulässige Sondertilgungen hängen vom Bankangebot ab; hier werden 5%, 10% des ursprünglichen Darlehensbetrags oder ein benutzerdefinierter Jahresbetrag simuliert.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainFixedTitle">Zinsbindung</h3><p data-i18n="explainFixedText">Das Tool prognostiziert keine künftigen Anschlussfinanzierungszinsen. Es zeigt die Restschuld zum Ende der Zinsbindung, um das Refinanzierungsrisiko einzuschätzen.</p></article>
+          <article class="explain-item"><h3 data-i18n="explainPenaltyTitle">Vorfälligkeitsentschädigung</h3><p data-i18n="explainPenaltyText">In Deutschland ist die Vorfälligkeitsentschädigung für Immobilienfinanzierungen kein einfacher fixer Prozentsatz. Banken verwenden komplexe Verlustmodelle. Die Szenarien 1%, 2%, 4%, 8% und 10% sind nur grobe Stresstests auf Basis der Restschuld und ersetzen keine Bankberechnung oder Rechtsberatung.</p></article>
+        </div>
+      </details>
+    </section>
+
+    <footer class="disclaimer" data-i18n="footerDisclaimer">Dieses Tool ist eine vereinfachte Modellrechnung und ersetzt keine Finanzierungsberatung oder ein verbindliches Bankangebot.</footer>
+  </div>
+
+  <script>
+    "use strict";
+
+    const LANGUAGE_STORAGE_KEY = "germanMortgageCalculatorLanguageV1";
+    const SUPPORTED_LANGUAGES = ["de", "en", "zh"];
+    const LOCALES = { de: "de-DE", en: "en-US", zh: "zh-CN" };
+    let currentLanguage = SUPPORTED_LANGUAGES.includes(localStorage.getItem(LANGUAGE_STORAGE_KEY)) ? localStorage.getItem(LANGUAGE_STORAGE_KEY) : "de";
+
+    const I18N = {
+      documentTitle: { de: "Immobilienfinanzierung Rechner Düsseldorf / NRW", en: "Mortgage Calculator Düsseldorf / NRW", zh: "杜塞尔多夫 / NRW 房贷计算器" },
+      languageLabel: { de: "Sprache", en: "Language", zh: "语言" },
+      heroTitle: { de: "Immobilienfinanzierung Rechner", en: "Mortgage Financing Calculator", zh: "房贷融资计算器" },
+      heroSubtitle: { de: "Annuitätendarlehen, Kaufnebenkosten, Eigenkapital-Strategie, Sondertilgung und Vorfälligkeitsentschädigung für Düsseldorf / NRW.", en: "Annuity loan, purchase costs, equity strategy, special repayments and early-repayment penalty simulation for Düsseldorf / NRW.", zh: "面向杜塞尔多夫 / NRW 的等额年金贷款、购房附加成本、本金策略、特别还款和提前还款违约金模拟。" },
+      badgeTax: { de: "NRW Grunderwerbsteuer 6,5%", en: "NRW transfer tax 6.5%", zh: "NRW 土地购置税 6.5%" },
+      badgeCosts: { de: "Kaufnebenkosten separat", en: "Purchase costs separated", zh: "购房附加成本单独计算" },
+      badgePenalty: { de: "Vorfälligkeit nur als grobe Simulation", en: "Early repayment is only a rough simulation", zh: "提前还款仅为粗略模拟" },
+      recordEyebrow: { de: "Datensatz", en: "Record", zh: "记录" },
+      recordTitle: { de: "Datensatz", en: "Record", zh: "记录信息" },
+      recordCopy: { de: "Speichern, laden und vergleichen vollständiger Finanzierungsvarianten.", en: "Save, load and compare complete financing scenarios.", zh: "保存、加载和对比完整房贷融资记录。" },
+      propertyCodeLabel: { de: "Immobilien-Code", en: "Property code", zh: "物业代号" },
+      bankOfferCodeLabel: { de: "Bankangebot-Code", en: "Bank offer code", zh: "银行合同或报价代号" },
+      recordNoteLabel: { de: "Notiz", en: "Note", zh: "备注" },
+      recordNotePlaceholder: { de: "z. B. 10J Sollzins offer", en: "e.g. 10Y fixed-rate offer", zh: "例如 10 年固定利率 offer" },
+      exportJsonButton: { de: "Als JSON speichern", en: "Save as JSON", zh: "保存为 JSON" },
+      importJsonButton: { de: "JSON laden", en: "Load JSON", zh: "加载 JSON" },
+      newBlankButton: { de: "Neuer leerer Datensatz", en: "New blank record", zh: "新建空白记录" },
+      addToComparisonButton: { de: "Zur Vergleichstabelle hinzufügen", en: "Add to comparison", zh: "加入对比表" },
+      recordNamePrefix: { de: "Name: ", en: "Name: ", zh: "记录名：" },
+      capitalEyebrow: { de: "Kapital", en: "Capital", zh: "本金" },
+      capitalTitle: { de: "1. Kaufpreis & Kapitalplanung", en: "1. Purchase Price & Capital Planning", zh: "1. 房价与本金规划" },
+      capitalCopy: { de: "Kaufpreis, Darlehensbetrag, Eigenkapitalbedarf und Liquidität nach Kauf.", en: "Purchase price, loan amount, equity requirement and liquidity after purchase.", zh: "房价、银行贷款金额、购房本金和买后现金流。" },
+      capitalModeLabel: { de: "Kapital-Modus", en: "Capital mode", zh: "计算模式" },
+      capitalModeTargetLoan: { de: "Gewünschter Darlehensbetrag", en: "Desired loan amount", zh: "我知道希望从银行贷款多少" },
+      capitalModePurchaseEquity: { de: "Eigenkapital für Kauf", en: "Equity for purchase", zh: "我知道这次最多准备用多少本金" },
+      purchasePriceLabel: { de: "Kaufpreis", en: "Purchase price", zh: "房价" },
+      purchasePriceHelper: { de: "Kaufpreis ohne Kaufnebenkosten.", en: "Purchase price excluding purchase costs.", zh: "房价，不含购房附加成本。" },
+      targetLoanLabel: { de: "Gewünschter Darlehensbetrag", en: "Desired loan amount", zh: "希望从银行贷款金额" },
+      targetLoanHelper: { de: "Wenn nur X € Bankdarlehen gewünscht sind, wird der nötige Eigenkapitalbedarf berechnet.", en: "If you only want to borrow X €, the required cash contribution is calculated.", zh: "如果只想从银行贷款 X €，系统反推总共需要准备多少现金。" },
+      purchaseEquityLabel: { de: "Für Kauf eingesetztes Eigenkapital", en: "Equity used for purchase", zh: "这次买房准备用的本金" },
+      purchaseEquityPlaceholder: { de: "Eigenkapital eingeben", en: "Enter equity", zh: "请输入 Eigenkapital" },
+      purchaseEquityHelper: { de: "Nicht das Gesamtvermögen, sondern der für diesen Kauf geplante Cash-Einsatz.", en: "Not total wealth, but the cash planned for this purchase.", zh: "不是全部 Gesamtvermögen，而是本次购房计划投入的现金。" },
+      liquidityEyebrow: { de: "Liquidität nach Kauf", en: "Liquidity after purchase", zh: "买房后的现金流动性" },
+      liquidFundsLabel: { de: "Aktuelle liquide Mittel", en: "Current liquid funds", zh: "当前可动用现金总额" },
+      liquidFundsHelper: { de: "Muss nicht vollständig für diesen Kauf eingesetzt werden.", en: "Does not have to be fully used for this purchase.", zh: "不一定全部用于本次购房。" },
+      costsEyebrow: { de: "Nebenkosten", en: "Purchase costs", zh: "购房附加成本" },
+      costsTitle: { de: "2. Kaufnebenkosten", en: "2. Purchase Costs", zh: "2. 购房附加成本" },
+      costsCopy: { de: "NRW/Düsseldorf-Standardwerte, je nach Objekt anpassbar.", en: "NRW/Düsseldorf defaults, adjustable per property.", zh: "NRW/Düsseldorf 默认值，可按房源情况调整。" },
+      advancedTaxLabel: { de: "Advanced: Grunderwerbsteuer editierbar. NRW-Standard ist 6,5%.", en: "Advanced: transfer tax editable. NRW default is 6.5%.", zh: "Advanced: Grunderwerbsteuer 可编辑。默认 NRW 为 6.5%。" },
+      transferTaxLabel: { de: "Grunderwerbsteuer", en: "Real estate transfer tax", zh: "土地购置税" },
+      notaryLabel: { de: "Notar + Grundbuch", en: "Notary + land register", zh: "公证 + 土地登记" },
+      notaryHelper: { de: "Vereinfachte Schätzung, individuell anpassbar.", en: "Simplified estimate, individually adjustable.", zh: "简化估算，可单独调整。" },
+      brokerPresetLabel: { de: "Maklerprovision Preset", en: "Broker commission preset", zh: "中介费预设" },
+      optionCustom: { de: "Benutzerdefiniert", en: "Custom", zh: "自定义" },
+      brokerLabel: { de: "Makler", en: "Broker", zh: "中介费" },
+      fixedExtraCostsLabel: { de: "Optionale fixe Zusatzkosten", en: "Optional fixed extra costs", zh: "可选固定额外购房成本" },
+      fixedExtraCostsHelper: { de: "Zum Beispiel Gutachter, Umzug oder kleinere Bankgebühren.", en: "For example appraisal, moving or small bank fees.", zh: "例如 Gutachter、搬家、银行小额费用等。" },
+      loanEyebrow: { de: "Darlehen", en: "Loan", zh: "贷款" },
+      loanTitle: { de: "3. Darlehen & Monatsrate", en: "3. Loan & Monthly Payment", zh: "3. 贷款与月供" },
+      loanCopy: { de: "Der Sollzins kommt vom Bankangebot. Du kannst die Tilgung festlegen oder eine gewünschte Monatsrate testen.", en: "The nominal interest rate comes from the bank offer. Set the repayment rate or test a desired monthly payment.", zh: "Sollzins 来自银行报价。你可以设定 Tilgung，也可以测试可承受月供。" },
+      loanCalcModeLabel: { de: "Berechnungsmodus: automatisch abgeleitetes Feld wählen", en: "Calculation mode: choose the field to derive automatically", zh: "计算模式：选择自动推导字段" },
+      calcModeRateLabel: { de: "A. Sollzins + anfängliche Tilgung -> Monatsrate", en: "A. Interest rate + initial repayment -> monthly payment", zh: "A. Sollzins + 初始 Tilgung -> 月供" },
+      calcModeRateHelper: { de: "Die Bank gibt den Zins vor; ich setze die Tilgung und berechne die Monatsrate.", en: "The bank provides the rate; I set repayment and calculate the monthly payment.", zh: "银行给出利率，我设定初始 Tilgung，自动计算月供。" },
+      calcModeTilgungLabel: { de: "B. Sollzins + gewünschte Monatsrate -> Tilgung", en: "B. Interest rate + desired monthly payment -> repayment rate", zh: "B. Sollzins + 可承受月供 -> Tilgung" },
+      calcModeTilgungHelper: { de: "Die Bank gibt den Zins vor; ich setze die tragbare Monatsrate und berechne die Tilgung.", en: "The bank provides the rate; I set an affordable payment and calculate repayment.", zh: "银行给出利率，我设定可承受月供，自动计算对应 Tilgung。" },
+      interestRateLabel: { de: "Sollzins p.a.", en: "Nominal interest p.a.", zh: "年化 Sollzins" },
+      interestRateHelper: { de: "Aus dem Bankangebot, z. B. 3,8-4,2%.", en: "From the bank offer, e.g. 3.8-4.2%.", zh: "来自银行报价，例如 3.8-4.2%。" },
+      initialTilgungLabel: { de: "Anfängliche Tilgung p.a.", en: "Initial repayment p.a.", zh: "年化初始 Tilgung" },
+      initialTilgungHelper: { de: "Tilgung% definiert die anfängliche Annuität, nicht einen festen Tilgungsbetrag.", en: "Repayment % defines the initial annuity, not a fixed principal amount.", zh: "Tilgung% 用来定义起始 Annuität，不是固定本金金额。" },
+      monthlyRateLabel: { de: "Gewünschte Monatsrate", en: "Desired monthly payment", zh: "可承受月供" },
+      fixedYearsLabel: { de: "Zinsbindung", en: "Fixed-rate period", zh: "固定利率期" },
+      simulationYearsLabel: { de: "Simulationsdauer", en: "Simulation duration", zh: "模拟时长" },
+      sonderEyebrow: { de: "Flexibilität", en: "Flexibility", zh: "灵活性" },
+      sonderTitle: { de: "4. Sondertilgung", en: "4. Special Repayment", zh: "4. 特别还款" },
+      sonderCopy: { de: "Simulationseinstellungen für jährliche Sondertilgungen.", en: "Simulation settings for annual special repayments.", zh: "每年 Sondertilgung 的模拟设置。" },
+      specialOptionLabel: { de: "Sondertilgung", en: "Special repayment", zh: "特别还款" },
+      specialNone: { de: "Keine", en: "None", zh: "无" },
+      specialFive: { de: "5% p.a. des anfänglichen Darlehensbetrags", en: "5% p.a. of initial loan amount", zh: "初始贷款金额的每年 5%" },
+      specialTen: { de: "10% p.a. des anfänglichen Darlehensbetrags", en: "10% p.a. of initial loan amount", zh: "初始贷款金额的每年 10%" },
+      specialCustom: { de: "Benutzerdefinierter Jahresbetrag", en: "Custom annual amount", zh: "自定义年度金额" },
+      specialOptionHelper: { de: "Simulation pro Jahr, abhängig vom Bankvertrag.", en: "Annual simulation, depending on the bank contract.", zh: "按年模拟，取决于银行合同。" },
+      specialCustomAmountLabel: { de: "Benutzerdefinierte Sondertilgung", en: "Custom special repayment", zh: "自定义 Sondertilgung" },
+      perYearSuffix: { de: "€/Jahr", en: "€/year", zh: "€/年" },
+      specialMonthLabel: { de: "Ausführungsmonat", en: "Execution month", zh: "执行月份" },
+      earlyEyebrow: { de: "Ablösung", en: "Early payoff", zh: "提前结清" },
+      earlyTitle: { de: "5. Vorzeitige Ablösung", en: "5. Early Payoff", zh: "5. 提前结清" },
+      earlyCopy: { de: "Grobe Simulation für vorzeitige Rückzahlung und Vorfälligkeitsentschädigung.", en: "Rough simulation for early repayment and early-repayment penalty.", zh: "提前结清和 Vorfälligkeitsentschädigung 粗略估算。" },
+      earlyEnabledLabel: { de: "Vorzeitige Ablösung simulieren", en: "Simulate early payoff", zh: "模拟提前还清" },
+      earlyYearLabel: { de: "Ablösejahr", en: "Payoff year", zh: "提前结清年份" },
+      earlyYearHelper: { de: "Am Jahresende wird die verbleibende Restschuld auf einmal abgelöst.", en: "At year-end, the remaining debt is paid off in one amount.", zh: "表示该年年底一次性偿还剩余 Restschuld。" },
+      penaltyModeLabel: { de: "Vorfälligkeitsentschädigung Modell", en: "Early-repayment penalty model", zh: "提前还款违约金模型" },
+      penaltyNone: { de: "Keine Entschädigung / 0%", en: "No penalty / 0%", zh: "无违约金 / 0%" },
+      penaltyPct1: { de: "Niedriges Stressszenario / 1% der Restschuld", en: "Low stress scenario / 1% of remaining debt", zh: "低压力场景 / 剩余本金 1%" },
+      penaltyPct2: { de: "Mittleres Stressszenario / 2% der Restschuld", en: "Medium stress scenario / 2% of remaining debt", zh: "中等压力场景 / 剩余本金 2%" },
+      penaltyPct4: { de: "Höheres Stressszenario / 4% der Restschuld", en: "Higher stress scenario / 4% of remaining debt", zh: "较高压力场景 / 剩余本金 4%" },
+      penaltyPct8: { de: "Hohes Stressszenario / 8% der Restschuld", en: "High stress scenario / 8% of remaining debt", zh: "高压力场景 / 剩余本金 8%" },
+      penaltyPct10: { de: "Sehr hohes Stressszenario / 10% der Restschuld", en: "Very high stress scenario / 10% of remaining debt", zh: "很高压力场景 / 剩余本金 10%" },
+      penaltyCustomPct: { de: "Benutzerdefinierter Prozentsatz der Restschuld", en: "Custom % of remaining debt", zh: "自定义剩余本金百分比" },
+      penaltyFixed: { de: "Fixer Entschädigungsbetrag", en: "Fixed penalty amount", zh: "固定违约金金额" },
+      penaltyModeHelper: { de: "Nur grobe Szenario-Rechnung. Die echte Vorfälligkeitsentschädigung wird von der Bank nach Vertragsdaten, Restlaufzeit, Zinsumfeld und zulässiger Methode berechnet.", en: "Rough scenario calculation only. The real penalty is calculated by the bank based on contract data, remaining term, interest environment and permitted method.", zh: "仅为粗略情景估算。真实 Vorfälligkeitsentschädigung 由银行根据合同数据、剩余期限、利率环境和允许方法计算。" },
+      penaltyPercentLabel: { de: "Benutzerdefinierte Entschädigung", en: "Custom penalty", zh: "自定义违约金" },
+      fixedPenaltyLabel: { de: "Fixe Entschädigung", en: "Fixed penalty", zh: "固定违约金" },
+      overviewEyebrow: { de: "Übersicht", en: "Overview", zh: "总览" },
+      overviewTitle: { de: "Finanzierungsübersicht", en: "Financing Overview", zh: "融资总览" },
+      overviewCopy: { de: "Gesamtüberblick über Kapitalstruktur und Rückzahlungsstrategie.", en: "Overview of capital structure and repayment strategy.", zh: "资金结构与还款策略总览。" },
+      amortizationEyebrow: { de: "Amortisation", en: "Amortization", zh: "还款" },
+      amortizationTitle: { de: "Jährliche Rückzahlungsdetails", en: "Annual Repayment Details", zh: "逐年还款明细" },
+      amortizationCopy: { de: "Jährliche Cashflow-Sicht: reguläre Zahlungen, Zinsen, Tilgung, Sondertilgung und Hinweise.", en: "Annual cashflow view: regular payments, interest, principal, special repayment and notes.", zh: "年度现金流视角：常规月供、当年利息、当年还本、Sondertilgung 和关键备注。" },
+      downloadCsvButton: { de: "CSV exportieren", en: "Export CSV", zh: "导出 CSV" },
+      printButton: { de: "Drucken / PDF", en: "Print / PDF", zh: "打印 / PDF" },
+      tableYearTitle: { de: "Jahr", en: "Year", zh: "年份" },
+      tableYearSubtitle: { de: "Jahr", en: "Year", zh: "年份" },
+      tableRegularTitle: { de: "Reguläre Zahlungen", en: "Regular payments", zh: "常规月供合计" },
+      tableRegularSubtitle: { de: "Summe Monatsraten", en: "monthly total", zh: "常规月供合计" },
+      tableInterestTitle: { de: "Zinsen im Jahr", en: "Interest in year", zh: "当年利息" },
+      tableInterestSubtitle: { de: "Jahreszins", en: "annual interest", zh: "当年利息" },
+      tablePrincipalTitle: { de: "Tilgung im Jahr", en: "Principal in year", zh: "当年常规还本" },
+      tablePrincipalSubtitle: { de: "Reguläre Tilgung", en: "regular principal", zh: "常规还本" },
+      tableSpecialTitle: { de: "Sondertilgung", en: "Special repayment", zh: "特别还款" },
+      tableSpecialSubtitle: { de: "Sonderzahlung", en: "special payment", zh: "特别还款" },
+      tableCumPrincipalTitle: { de: "Kumulierte Tilgung", en: "Cumulative principal", zh: "累计还本" },
+      tableCumPrincipalSubtitle: { de: "Gesamttilgung", en: "total principal", zh: "累计还本" },
+      tableCumInterestTitle: { de: "Kumulierte Zinsen", en: "Cumulative interest", zh: "累计利息" },
+      tableCumInterestSubtitle: { de: "Gesamtzinsen", en: "total interest", zh: "累计利息" },
+      tableDebtTitle: { de: "Restschuld Jahresende", en: "Debt at year-end", zh: "年末剩余本金" },
+      tableDebtSubtitle: { de: "Restschuld", en: "remaining debt", zh: "剩余本金" },
+      tableNoteTitle: { de: "Hinweis", en: "Note", zh: "备注" },
+      tableNoteSubtitle: { de: "Notiz", en: "Note", zh: "备注" },
+      comparisonEyebrow: { de: "Vergleich", en: "Comparison", zh: "对比" },
+      comparisonTitle: { de: "Vergleich", en: "Comparison", zh: "方案对比" },
+      comparisonCopy: { de: "Aktuellen Datensatz oder gespeicherte JSON-Dateien vergleichen. Die Tabelle wird lokal im Browser gespeichert und kann jederzeit geleert werden.", en: "Compare the current record or saved JSON files. The table is stored locally in this browser and can be cleared anytime.", zh: "把当前记录或已保存 JSON 加入对比。对比表暂存在本浏览器 localStorage，可随时清空。" },
+      comparisonAddCurrentButton: { de: "Aktuellen Datensatz vergleichen", en: "Compare current record", zh: "当前记录加入对比" },
+      comparisonImportButton: { de: "JSON in Vergleich importieren", en: "Import JSON to comparison", zh: "导入 JSON 到对比" },
+      comparisonClearButton: { de: "Vergleich leeren", en: "Clear comparison", zh: "清空对比" },
+      explainSummary: { de: "Berechnungslogik", en: "Calculation Logic", zh: "计算逻辑说明" },
+      footerDisclaimer: { de: "Dieses Tool ist eine vereinfachte Modellrechnung und ersetzt keine Finanzierungsberatung oder ein verbindliches Bankangebot.", en: "This tool is a simplified model calculation and does not replace financing advice or a binding bank offer.", zh: "本工具是简化模型计算，不能替代融资咨询或具有约束力的银行报价。" },
+      explainCostsTitle: { de: "Kaufnebenkosten in NRW/Düsseldorf", en: "Purchase costs in NRW/Düsseldorf", zh: "NRW/Düsseldorf 的购房附加成本" },
+      explainCostsText: { de: "Die Grunderwerbsteuer in NRW beträgt 6,5% des Kaufpreises. Notar + Grundbuch werden separat geschätzt, hier standardmäßig mit 2,0%. Die Maklerprovision hängt von Objekt und Vertrag ab und bleibt daher editierbar.", en: "The real estate transfer tax in NRW is 6.5% of the purchase price. Notary + land register are estimated separately, defaulting to 2.0% here. Broker commission depends on property and contract, so it remains editable.", zh: "NRW 的 Grunderwerbsteuer 为 Kaufpreis 的 6.5%。Notar + Grundbuch 通常单独估算，本工具默认 2.0%。Maklerprovision 取决于房源和合同，所以保持可编辑。" },
+      explainEquityTitle: { de: "Warum Kaufnebenkosten meist aus Eigenkapital gezahlt werden", en: "Why purchase costs are usually paid from equity", zh: "为什么 Kaufnebenkosten 通常需要从 Eigenkapital 支付" },
+      explainEquityText: { de: "Banken finanzieren üblicherweise eher den Immobilienwert selbst als die Kaufnebenkosten. Deshalb trennt der Rechner Kaufnebenkosten und Eigenkapital für Bank. Eigenkapitalbedarf für Kauf = Kaufnebenkosten + Eigenkapital für Bank.", en: "Banks usually prefer financing the property value itself rather than purchase costs. Therefore the calculator separates purchase costs and equity for the bank. Equity required for purchase = purchase costs + equity for bank.", zh: "银行通常更愿意融资房产价值本身，而不是购房附加成本。因此本计算器把 Kaufnebenkosten 与 Eigenkapital für Bank 分开处理。Eigenkapitalbedarf für Kauf = Kaufnebenkosten + Eigenkapital für Bank。" },
+      explainCapitalTitle: { de: "Kapitalplanung und Liquidität", en: "Capital planning and liquidity", zh: "Kapitalplanung 与 Liquidität" },
+      explainCapitalText: { de: "Du kannst vom gewünschten Bankdarlehen oder vom maximal geplanten Eigenkapital für den Kauf ausgehen. Kaufnebenkosten müssen typischerweise bar bezahlt werden; das Bankdarlehen bezieht sich meistens auf den Immobilienwert. Bei Ziel-Darlehen gilt: Eigenkapitalbedarf für Kauf = Kaufnebenkosten + Kaufpreis - gewünschter Darlehensbetrag. Liquidität nach Kauf = aktuelle liquide Mittel - Eigenkapitalbedarf für Kauf.", en: "You can start from the desired bank loan or from the maximum equity planned for the purchase. Purchase costs typically need to be paid in cash; the bank loan usually refers to the property value. With a target loan: required equity for purchase = purchase costs + purchase price - desired loan amount. Liquidity after purchase = current liquid funds - required equity for purchase.", zh: "用户可以从希望的 Bankdarlehen 出发，也可以从本次买房最多愿意投入的 Eigenkapital 出发。Kaufnebenkosten 通常需要现金支付；银行贷款金额通常指房产本身的 Darlehensbetrag。若从目标贷款金额出发，公式为：Eigenkapitalbedarf für Kauf = Kaufnebenkosten + Kaufpreis - gewünschter Darlehensbetrag。Liquidität nach Kauf = Aktuelle liquide Mittel - Eigenkapitalbedarf für Kauf。" },
+      explainRecordTitle: { de: "Datensatz / JSON", en: "Record / JSON", zh: "Datensatz / JSON 记录" },
+      explainRecordText: { de: "Jeder Datensatz speichert Eingaben, Metadaten und einen Berechnungssnapshot. Beim erneuten Laden ist inputState maßgeblich; calculatedSnapshot dient nur zur schnellen Prüfung und zum Vergleich. Die Vergleichstabelle liegt im localStorage dieses Browsers und kann geleert werden.", en: "Each record stores inputs, metadata and a calculation snapshot. When reloading, inputState is authoritative; calculatedSnapshot is only for quick checks and comparison. The comparison table is stored in this browser's localStorage and can be cleared.", zh: "每个 Datensatz 保存一套完整输入、记录信息和计算快照。重新加载 JSON 时，系统以 inputState 为准并重新计算；calculatedSnapshot 只用于快速核对和方案对比。Vergleich 对比表可暂存在本浏览器 localStorage，也可以随时清空。" },
+      explainAnnuityTitle: { de: "Annuitätendarlehen", en: "Annuity loan", zh: "Annuitätendarlehen" },
+      explainAnnuityText: { de: "Während der Zinsbindung bleibt die Monatsrate üblicherweise konstant. Mit sinkender Restschuld fällt der Zinsanteil, während der Tilgungsanteil steigt.", en: "During the fixed-rate period, the monthly payment usually stays constant. As remaining debt falls, the interest share decreases and the principal share increases.", zh: "在 Zinsbindung 期间，Monatsrate 通常保持恒定。随着 Restschuld 下降，每月利息部分减少，本金偿还部分增加。" },
+      explainTableTitle: { de: "Jährliche Rückzahlungstabelle", en: "Annual repayment table", zh: "年度还款表" },
+      explainTableText: { de: "„Tilgung im Jahr“ ist der Teil der regulären Monatsraten, der die Restschuld reduziert, ohne Zinsen und ohne Sondertilgung. „Sondertilgung“ wird separat gezeigt. „Kumulierte Tilgung“ enthält reguläre Tilgung und Sondertilgung. „Restschuld Jahresende“ zeigt die verbleibende Schuld nach allen Zahlungen im Jahr. Vorfälligkeitsentschädigung erscheint bei simulierter Ablösung in den Hinweisen.", en: "“Principal in year” is the part of regular monthly payments that reduces debt, excluding interest and special repayments. “Special repayment” is shown separately. “Cumulative principal” includes regular principal and special repayments. “Debt at year-end” shows remaining debt after all payments in the year. Early-repayment penalty appears in the notes when early payoff is simulated.", zh: "“Tilgung im Jahr / 当年常规还本”指常规月供中真正用于减少本金的部分，不包括利息，也不包括 Sondertilgung。“Sondertilgung”单独显示。“Kumulierte Tilgung / 累计还本”包含常规还本和 Sondertilgung。“Restschuld Jahresende”表示该年全部付款之后仍欠银行的本金。Vorfälligkeitsentschädigung 在模拟提前结清时写入备注。" },
+      explainTilgungTitle: { de: "Anfängliche Tilgung", en: "Initial repayment", zh: "Anfängliche Tilgung" },
+      explainTilgungText: { de: "Tilgung% ist kein fixer monatlicher Tilgungsbetrag, sondern definiert zusammen mit dem Sollzins die anfängliche Annuität. Formel: Jahresrate = Darlehensbetrag × (Sollzins% + Tilgung%) / 100.", en: "Repayment % is not a fixed monthly principal amount. Together with the nominal interest rate it defines the initial annuity. Formula: annual payment = loan amount × (interest % + repayment %) / 100.", zh: "Tilgung% 不是固定的每月本金金额，而是与 Sollzins 一起定义起始年度 Annuität。公式为 Jahresrate = Darlehensbetrag × (Sollzins% + Tilgung%) / 100。" },
+      explainPlanningTitle: { de: "Sollzins und Monatsrate in der Planung", en: "Interest rate and monthly payment planning", zh: "Sollzins 与 Monatsrate 的实际规划方式" },
+      explainPlanningText: { de: "Bei deutschen Immobilienkrediten kommt der Sollzins üblicherweise aus dem Bankangebot. Praktisch entscheidest du dann über die Tilgung oder leitest die passende Tilgung aus einer tragbaren Monatsrate ab.", en: "For German mortgages, the nominal interest rate usually comes from the bank offer. In practice you choose repayment or derive it from an affordable monthly payment.", zh: "在德国房贷中，Sollzins 通常来自银行 offer。实际决策一般是在银行给定利率下选择 Tilgung，或者根据自己可承受的 Monatsrate 反推 Tilgung。" },
+      explainSpecialTitle: { de: "Sondertilgung", en: "Special repayment", zh: "Sondertilgung" },
+      explainSpecialText: { de: "Sondertilgungen reduzieren die Restschuld schneller. Vertraglich zulässige Sondertilgungen hängen vom Bankangebot ab; hier werden 5%, 10% des ursprünglichen Darlehensbetrags oder ein benutzerdefinierter Jahresbetrag simuliert.", en: "Special repayments reduce remaining debt faster. Allowed special repayments depend on the bank offer; this tool simulates 5%, 10% of the original loan amount or a custom annual amount.", zh: "Sondertilgung 会更快降低 Restschuld。真实合同中允许的 Sondertilgung 取决于银行 offer；这里按原始 Darlehensbetrag 的 5% 或 10% 每年模拟，或使用自定义年度金额。" },
+      explainFixedTitle: { de: "Zinsbindung", en: "Fixed-rate period", zh: "Zinsbindung" },
+      explainFixedText: { de: "Das Tool prognostiziert keine künftigen Anschlussfinanzierungszinsen. Es zeigt die Restschuld zum Ende der Zinsbindung, um das Refinanzierungsrisiko einzuschätzen.", en: "The tool does not forecast future refinancing rates. It shows remaining debt at the end of the fixed-rate period to help assess refinancing risk.", zh: "本工具不预测未来 Anschlussfinanzierung 利率，只显示 Zinsbindung 结束时的 Restschuld，帮助判断再融资风险。" },
+      explainPenaltyTitle: { de: "Vorfälligkeitsentschädigung", en: "Early-repayment penalty", zh: "Vorfälligkeitsentschädigung" },
+      explainPenaltyText: { de: "In Deutschland ist die Vorfälligkeitsentschädigung für Immobilienfinanzierungen kein einfacher fixer Prozentsatz. Banken verwenden komplexe Verlustmodelle. Die Szenarien 1%, 2%, 4%, 8% und 10% sind nur grobe Stresstests auf Basis der Restschuld und ersetzen keine Bankberechnung oder Rechtsberatung.", en: "In Germany, early-repayment penalties for mortgages are not a simple fixed percentage. Banks use complex loss models. The 1%, 2%, 4%, 8% and 10% scenarios are only rough stress tests based on remaining debt and do not replace a bank calculation or legal advice.", zh: "在德国，Vorfälligkeitsentschädigung 对 Immobilienfinanzierung 不是一个简单固定百分比。银行通常使用复杂的损失模型。本工具中的 1%、2%、4%、8%、10% 只是对 Restschuld 的粗略压力测试，不能替代银行计算或法律建议。" },
+      notPaidWithinSimulation: { de: "nicht innerhalb der Simulation getilgt", en: "not paid off within simulation", zh: "未在模拟期内还清" },
+      yearsMonths: { de: "{years} Jahre {month} Monate", en: "{years} years {month} months", zh: "{years} 年 {month} 个月" },
+      unnamedRecord: { de: "Unbenannt", en: "Untitled", zh: "未命名" },
+      noFileLoaded: { de: "Keine Datei geladen", en: "No file loaded", zh: "未加载文件" },
+      sourceFile: { de: "Quelle: {file}", en: "Source: {file}", zh: "来源：{file}" },
+      recordStatusEmpty: { de: "Leerer Datensatz", en: "Blank record", zh: "空白记录" },
+      recordStatusLoaded: { de: "Geladen", en: "Loaded", zh: "已加载" },
+      recordStatusModified: { de: "Geändert", en: "Modified", zh: "已修改" },
+      recordStatusSaved: { de: "Gespeichert", en: "Saved", zh: "已保存" },
+      recordNameChanged: { de: "Datensatzname geändert; beim Speichern wird ein neuer Dateiname erzeugt.", en: "Record name changed; saving will create a new filename.", zh: "记录名称已改变，保存时将生成新文件名。" },
+      recordModifiedUnsaved: { de: "Geändert, noch nicht erneut gespeichert.", en: "Modified, not saved again yet.", zh: "已修改，尚未重新保存。" },
+      savedAt: { de: "Gespeichert: {time}", en: "Saved: {time}", zh: "保存时间：{time}" },
+      metadataPropertyRequired: { de: "Bitte Immobilien-Code ausfüllen.", en: "Please enter the property code.", zh: "请填写物业代号。" },
+      metadataBankRequired: { de: "Bitte Bankangebot-Code ausfüllen.", en: "Please enter the bank offer code.", zh: "请填写银行报价/合同代号。" },
+      invalidRecordFormat: { de: "Nicht unterstütztes Datensatzformat.", en: "Unsupported record format.", zh: "不支持的记录格式。" },
+      cannotReadJson: { de: "JSON-Datei kann nicht gelesen werden.", en: "Cannot read JSON file.", zh: "无法读取 JSON 文件。" },
+      confirmLoadUnsaved: { de: "Der aktuelle Datensatz ist nicht gespeichert. Trotzdem eine andere Variante laden?", en: "The current record is unsaved. Load another scenario anyway?", zh: "当前记录尚未保存，确定要载入另一个方案吗？" },
+      confirmNewUnsaved: { de: "Der aktuelle Datensatz ist nicht gespeichert. Trotzdem einen leeren Datensatz erstellen?", en: "The current record is unsaved. Create a blank record anyway?", zh: "当前记录尚未保存，确定要新建空白记录吗？" },
+      jsonLoadedWithDefaults: { de: "JSON geladen, aber einige Felder fehlen; Standardwerte wurden verwendet.", en: "JSON loaded, but some fields are missing; defaults were used.", zh: "JSON 已加载，但部分字段缺失，已使用默认值。" },
+      fillCodesFirst: { de: "Bitte zuerst Immobilien-Code und Bankangebot-Code ausfüllen.", en: "Please enter property code and bank offer code first.", zh: "请先填写物业代号和银行报价代号。" },
+      noComparisonRecords: { de: "Noch keine Vergleichsdatensätze. Fülle zuerst die Datensatzinformationen aus und klicke auf „Aktuellen Datensatz vergleichen“ oder importiere gespeicherte JSON-Dateien.", en: "No comparison records yet. Fill in record information and click “Compare current record”, or import saved JSON files.", zh: "暂无对比记录。先填写记录信息后点击“当前记录加入对比”，或导入已保存 JSON。" },
+      metricHeader: { de: "Metrik", en: "Metric", zh: "指标" },
+      loadButton: { de: "Laden", en: "Load", zh: "载入" },
+      removeButton: { de: "Entfernen", en: "Remove", zh: "移除" },
+      jsonRecord: { de: "JSON-Datensatz", en: "JSON record", zh: "JSON 记录" },
+      valueYes: { de: "Ja", en: "Yes", zh: "是" },
+      valueNo: { de: "Nein", en: "No", zh: "否" },
+      noGap: { de: "Keine Lücke", en: "No gap", zh: "无缺口" },
+      noLoanNeeded: { de: "Kein Darlehen nötig", en: "No loan needed", zh: "无需贷款" },
+      yearValue: { de: "{value} Jahre", en: "{value} years", zh: "{value} 年" },
+      ordinalYear: { de: "{year}. Jahr", en: "Year {year}", zh: "第 {year} 年" },
+      warningPurchasePricePositive: { de: "Kaufpreis muss größer als 0 sein.", en: "Purchase price must be greater than 0.", zh: "Kaufpreis 必须大于 0。" },
+      warningLoanCapped: { de: "Der Darlehensbetrag kann nicht höher als der Kaufpreis sein; aktuell wird auf den Kaufpreis begrenzt.", en: "The loan amount cannot exceed the purchase price; it is capped at the purchase price.", zh: "贷款金额不能高于房价；当前按房价封顶。" },
+      warningAlmostNoBankEquity: { de: "Das bedeutet fast kein Eigenkapital für die Bank, aber Kaufnebenkosten müssen weiterhin bar bezahlt werden.", en: "This means almost no equity for the bank, but purchase costs still need to be paid in cash.", zh: "这意味着几乎没有 Eigenkapital für Bank，但 Kaufnebenkosten 仍需现金支付。" },
+      warningEquityBelowCosts: { de: "Das geplante Eigenkapital reicht nicht aus, um die Kaufnebenkosten zu decken.", en: "The planned equity is not enough to cover purchase costs.", zh: "本次买房本金不足以覆盖 Kaufnebenkosten。" },
+      warningInsufficientCash: { de: "Die aktuellen liquiden Mittel reichen für diesen Kauf nicht aus.", en: "Current liquid funds are not sufficient for this purchase.", zh: "当前可动用现金不足以完成这次购房。" },
+      warningNoLoan: { de: "Kein Darlehen nötig: Darlehensbetrag ist 0; Darlehen & Monatsrate wurden still behandelt.", en: "No loan needed: loan amount is 0; loan and monthly payment were handled silently.", zh: "无需贷款：Darlehensbetrag 为 0，Darlehen & Monatsrate 计算已静默处理。" },
+      warningMonthlyRatePositive: { de: "Monatsrate muss größer als 0 sein.", en: "Monthly payment must be greater than 0.", zh: "Monatsrate 必须大于 0。" },
+      warningRepaymentNotEffective: { de: "Die aktuelle Monatsrate deckt fast nur die Zinsen; die Restschuld sinkt nicht wirksam.", en: "The current monthly payment barely covers interest; principal will not decrease effectively.", zh: "当前月供几乎只够支付利息，贷款本金不会有效下降。" },
+      warningBelowMonthlyInterest: { de: "Die Monatsrate liegt unter dem anfänglichen Monatszins; das Darlehen reduziert sich nicht normal.", en: "Monthly payment is below first-month interest; the loan will not decrease normally.", zh: "月供低于首月利息，贷款不会正常减少。" },
+      warningNoLoanCalculation: { de: "Kaufpreis muss größer als 0 sein; aktuell wird keine Darlehensrechnung durchgeführt.", en: "Purchase price must be greater than 0; loan calculation is currently skipped.", zh: "Kaufpreis 必须大于 0，当前不进行贷款计算。" },
+      warningPaymentBelowInterest: { de: "Monatsrate liegt unter oder gleich dem Monatszins; das Darlehen reduziert sich nicht normal.", en: "Monthly payment is lower than or equal to monthly interest; the loan will not decrease normally.", zh: "Monatsrate / 月供低于或等于当月利息，贷款不会正常减少。" },
+      earlyAlreadyPaid: { de: "Zu diesem Zeitpunkt wäre das Darlehen bereits vollständig getilgt.", en: "At this point the loan would already be fully repaid.", zh: "到这个时间点贷款已经完全还清。" },
+      earlyAfterFixedWarning: { de: "Nach Ende der Zinsbindung kann die Situation anders sein. Dieses Tool simuliert weiterhin mit dem aktuellen Sollzins und ersetzt keine Anschlussfinanzierung.", en: "After the fixed-rate period, the situation may differ. This tool continues with the current interest rate and does not replace refinancing planning.", zh: "Zinsbindung 结束后情况可能不同。本工具仍用当前 Sollzins 继续模拟，不能代表真实再融资条件。" },
+      earlyDuringFixedWarning: { de: "Bei vorzeitiger Rückzahlung während der Zinsbindung kann eine Vorfälligkeitsentschädigung entstehen. Die echte Berechnung hängt vom Bankvertrag und Marktzins ab.", en: "Early repayment during the fixed-rate period may trigger a penalty. The real calculation depends on the bank contract and market rates.", zh: "在固定利率期内提前还款可能产生 Vorfälligkeitsentschädigung。真实计算取决于银行合同和市场利率。" },
+      noteFixedEnds: { de: "Zinsbindung endet", en: "Fixed-rate period ends", zh: "Zinsbindung 结束" },
+      noteFullyPaid: { de: "Darlehen vollständig getilgt", en: "Loan fully repaid", zh: "贷款已完全还清" },
+      notePlannedPayoff: { de: "Geplante Ablösung", en: "Planned payoff", zh: "计划提前结清" },
+      noPenalty: { de: "keine Entschädigung", en: "no penalty", zh: "无违约金" },
+      penaltyAmountText: { de: "Vorfälligkeitsentschädigung {amount}", en: "early-repayment penalty {amount}", zh: "Vorfälligkeitsentschädigung {amount}" },
+      plannedPayoffNote: { de: "Geplante Ablösung: Restschuld {debt}, {penalty}, Ablösebetrag {payoff}.", en: "Planned payoff: remaining debt {debt}, {penalty}, payoff amount {payoff}.", zh: "计划提前结清：Restschuld {debt}，{penalty}，Ablösebetrag {payoff}。" },
+      costTotalLabel: { de: "Kaufnebenkosten gesamt", en: "Total purchase costs", zh: "购房附加成本合计" },
+      costTotalNote: { de: "GrESt + Notar/Grundbuch + Makler + fix", en: "Tax + notary/register + broker + fixed", zh: "GrESt + Notar/Grundbuch + Makler + 固定成本" },
+      costRatioLabel: { de: "Kaufnebenkosten / Kaufpreis", en: "Purchase costs / purchase price", zh: "购房附加成本 / 房价" },
+      costRatioNote: { de: "Anteil am Kaufpreis", en: "Share of purchase price", zh: "占 Kaufpreis 比例" },
+      costGapLabel: { de: "Kaufnebenkosten-Lücke", en: "Purchase cost gap", zh: "Kaufnebenkosten 缺口" },
+      costGapNote: { de: "Wird angezeigt, wenn das Eigenkapital die Kaufnebenkosten nicht deckt", en: "Shown if equity does not cover purchase costs", zh: "买房本金不足以覆盖 Kaufnebenkosten 时显示" },
+      costGapInlineNote: { de: "Achtung: Es gibt eine Cash-Lücke von {gap}.", en: "Warning: there is a cash gap of {gap}.", zh: "注意：存在现金缺口 {gap}。" },
+      liquidityShortPrefix: { de: "Aktuell fehlen nach dem Kauf voraussichtlich", en: "Based on current inputs, expected cash shortfall after purchase is", zh: "当前现金不足，买房后缺口约" },
+      liquidityRemainPrefix: { de: "Nach aktuellem Input bleibt voraussichtlich Liquidität", en: "Based on current inputs, estimated liquidity after purchase is", zh: "按当前输入，买房后预计还剩 Liquidität" },
+      annualSpecialLabel: { de: "Geschätzte jährliche Sondertilgung", en: "Estimated annual special repayment", zh: "预计年度 Sondertilgung" },
+      annualSpecialNote: { de: "Wird automatisch gedeckelt, wenn die Restschuld niedriger ist.", en: "Automatically capped if remaining debt is lower.", zh: "若 Restschuld 更低会自动封顶。" },
+      earlyDisabledLabel: { de: "Vorzeitige Ablösung", en: "Early payoff", zh: "提前结清" },
+      earlyDisabledValue: { de: "Nicht aktiviert", en: "Disabled", zh: "未启用" },
+      earlyDisabledNote: { de: "Nach Aktivierung werden Restschuld, Vorfälligkeitsentschädigung und Ablösebetrag angezeigt.", en: "When enabled, remaining debt, penalty and payoff amount are shown.", zh: "打开后显示 Restschuld、Vorfälligkeitsentschädigung、Ablösebetrag。" },
+      roughEstimate: { de: "grobe Schätzung", en: "rough estimate", zh: "粗略估算" },
+      restPlusPenalty: { de: "Restschuld + Entschädigung", en: "remaining debt + penalty", zh: "Restschuld + penalty" },
+      noBreakdownRows: { de: "Keine Rückzahlungsdetails verfügbar.", en: "No repayment details available.", zh: "暂无可显示的还款明细。" },
+      simulationEndsTitle: { de: "Simulation endet vor Volltilgung.", en: "Simulation ends before full repayment.", zh: "模拟期结束时贷款尚未还清。" },
+      simulationEndsText: { de: "Nach {years} Jahren verbleibt eine Restschuld von {amount}. Erhöhe Simulationsdauer, Tilgung oder Sondertilgung, wenn du die vollständige Laufzeit sehen möchtest.", en: "After {years} years, remaining debt is {amount}. Increase simulation duration, repayment rate or special repayment to see the full term.", zh: "模拟 {years} 年后仍有 Restschuld {amount}。如果要看到完整还清时间，需要延长模拟时间，或提高 Tilgung / Sondertilgung。" },
+      derivedMonthlyRateLabel: { de: "Berechnete Monatsrate", en: "Calculated monthly payment", zh: "计算出的月供" },
+      derivedMonthlyRateNote: { de: "Sollzins + anfängliche Tilgung -> Monatsrate", en: "Interest rate + initial repayment -> monthly payment", zh: "Sollzins + 初始 Tilgung -> 月供" },
+      derivedTilgungLabel: { de: "Berechnete anfängliche Tilgung", en: "Calculated initial repayment", zh: "计算出的初始 Tilgung" },
+      derivedTilgungNote: { de: "Sollzins + gewünschte Monatsrate -> Tilgung", en: "Interest rate + desired monthly payment -> repayment", zh: "Sollzins + 可承受月供 -> Tilgung" },
+      kapitalModeTargetLine: { de: "Ziel-Darlehen: {loan}, dafür nötiges Eigenkapital für Kauf: {equity}", en: "Target loan: {loan}, required equity for purchase: {equity}", zh: "目标 Darlehen：{loan}，所需买房本金：{equity}" },
+      kapitalModeEquityLine: { de: "Für Kauf eingesetztes Eigenkapital: {equity}, daraus Bankdarlehen: {loan}", en: "Equity used for purchase: {equity}, resulting bank loan: {loan}", zh: "本次买房投入本金：{equity}，对应 Bankdarlehen：{loan}" },
+      kapitalStructure: { de: "Kapitalstruktur", en: "Capital structure", zh: "资金结构" },
+      totalInterestUntilPayoff: { de: "Gesamtzins bis Volltilgung", en: "Total interest until full repayment", zh: "完整还清前总利息" },
+      totalInterestUntilSimulationEnd: { de: "Gesamtzins bis Simulationsende", en: "Total interest until simulation end", zh: "模拟期结束前总利息" },
+      financingCostWithEarly: { de: "Zinsen bis Ablösung + Vorfälligkeitsentschädigung", en: "Interest until payoff + early-repayment penalty", zh: "提前结清前利息 + Vorfälligkeitsentschädigung" },
+      equityNeedCard: { de: "Eigenkapitalbedarf", en: "Equity required", zh: "需要准备的本金" },
+      bankLoanCard: { de: "Bankdarlehen", en: "Bank loan", zh: "银行贷款" },
+      financingCostCard: { de: "Finanzierungskosten", en: "Financing costs", zh: "贷款成本" },
+      purchasePriceMetric: { de: "Kaufpreis", en: "Purchase price", zh: "房价" },
+      purchaseCostsMetric: { de: "Kaufnebenkosten", en: "Purchase costs", zh: "购房附加成本" },
+      bankEquityMetric: { de: "Eigenkapital für Bank", en: "Equity for bank", zh: "降低贷款的本金" },
+      remainingLiquidityMetric: { de: "Verbleibende Liquidität", en: "Remaining liquidity", zh: "买房后剩余流动资金" },
+      bankLoanMetric: { de: "Bankdarlehen", en: "Bank loan", zh: "银行贷款" },
+      monthlyRateMetric: { de: "Monatsrate", en: "Monthly payment", zh: "月供" },
+      annualSpecialMetric: { de: "Sondertilgung p.a.", en: "Special repayment p.a.", zh: "年度 Sondertilgung" },
+      totalSpecialPaidMetric: { de: "Gezahlte Sondertilgung gesamt", en: "Total special repayments paid", zh: "累计 Sondertilgung" },
+      modeMetric: { de: "Modus", en: "Mode", zh: "模式" },
+      equityGapMetric: { de: "Eigenkapital-Lücke", en: "Equity gap", zh: "本金缺口" },
+      ltvMetric: { de: "Beleihungsauslauf", en: "Loan-to-value", zh: "贷款成数" },
+      interestPlusTilgungMetric: { de: "Sollzins + Tilgung", en: "Interest + repayment", zh: "Sollzins + Tilgung" },
+      costBasisMetric: { de: "Kostenbasis", en: "Cost basis", zh: "成本口径" },
+      payoffYearMetric: { de: "Ablösejahr", en: "Payoff year", zh: "提前结清年份" },
+      interestUntilPayoffMetric: { de: "Zinsen bis Ablösung", en: "Interest until payoff", zh: "提前结清前利息" },
+      restDebtAtPayoffMetric: { de: "Restschuld zum Ablösezeitpunkt", en: "Remaining debt at payoff", zh: "提前结清时 Restschuld" },
+      payoffAmountMetric: { de: "Ablösebetrag", en: "Payoff amount", zh: "提前结清总额" },
+      totalInterestFixedMetric: { de: "Gesamtzins bis Zinsbindung", en: "Total interest until fixed-rate end", zh: "固定利率期内总利息" },
+      restAfterFixedMetric: { de: "Restschuld nach Zinsbindung", en: "Debt after fixed-rate period", zh: "固定利率期后 Restschuld" },
+      termUntilPayoffMetric: { de: "Laufzeit bis Volltilgung", en: "Term until full repayment", zh: "完整还清时间" },
+      monthlyAnnuityNote: { de: "monatliche Annuität", en: "monthly annuity", zh: "月度 Annuität" },
+      annualSimulationNote: { de: "jährlich simuliert", en: "simulated annually", zh: "按年模拟" },
+      withinSimulationNote: { de: "innerhalb der Simulation", en: "within simulation", zh: "模拟期内" },
+      simulationEndsBeforePayoff: { de: "Simulation endet vor Volltilgung", en: "Simulation ends before full repayment", zh: "模拟结束前未还清" },
+      remainingDebtAfterYears: { de: "Nach {years} Jahren verbleibt Restschuld", en: "Remaining debt after {years} years", zh: "{years} 年后仍有 Restschuld" },
+      principalLegend: { de: "Tilgung", en: "Principal", zh: "本金还款" },
+      interestLegend: { de: "Zinsen", en: "Interest", zh: "利息" },
+      reserveDistanceMetric: { de: "Reserve-Abstand", en: "Reserve distance", zh: "储备差额" },
+      interestRateMetric: { de: "Sollzins", en: "Nominal interest", zh: "Sollzins" },
+      initialRepaymentMetric: { de: "Anfängliche Tilgung", en: "Initial repayment", zh: "初始 Tilgung" },
+      earlyEnabledMetric: { de: "Vorzeitige Ablösung aktiviert", en: "Early payoff enabled", zh: "是否启用提前结清" },
+      penaltyMetric: { de: "Vorfälligkeitsentschädigung", en: "Early-repayment penalty", zh: "提前还款违约金" },
+      noteMetric: { de: "Notiz", en: "Note", zh: "备注" }
+    };
+
+    function t(key, vars = {}) {
+      const entry = I18N[key];
+      const template = (entry && (entry[currentLanguage] || entry.de)) || key;
+      return Object.entries(vars).reduce((text, [name, value]) => text.replaceAll(`{${name}}`, String(value)), template);
+    }
+
+    function applyStaticTranslations() {
+      document.documentElement.lang = currentLanguage === "zh" ? "zh-CN" : currentLanguage;
+      document.title = t("documentTitle");
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        node.textContent = t(node.dataset.i18n);
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+        node.placeholder = t(node.dataset.i18nPlaceholder);
+      });
+      const selector = document.getElementById("languageSelect");
+      if (selector) selector.value = currentLanguage;
+    }
+
+    const state = {
+      purchase: {},
+      loan: {},
+      sondertilgung: {},
+      earlyRepayment: {},
+      lastResult: null,
+      warningsEnabled: false,
+      comparisonBasket: [],
+      isLoadingRecord: false,
+      recordState: {
+        status: "empty",
+        sourceFileName: null,
+        loadedAt: null,
+        savedAt: null,
+        lastModifiedAt: null,
+        baselineHash: null
+      }
+    };
+
+    const ids = [
+      "purchasePrice", "targetLoanAmount", "purchaseEquityBudget", "liquidFundsTotal", "advancedTax", "transferTaxRate", "notaryRate",
+      "brokerPreset", "brokerRate", "fixedExtraCosts", "interestRate", "initialTilgung", "monthlyRate",
+      "fixedYears", "simulationYears", "specialOption", "specialCustomAmount", "specialMonth", "earlyEnabled",
+      "earlyYear", "penaltyMode", "penaltyPercent", "fixedPenaltyAmount",
+      "warnings", "costComputed", "sonderComputed", "breakdownWarning",
+      "earlyCompact", "loanDerivedResult", "tilgungField", "monthlyRateField", "capitalLiquidityLine", "overviewMajorGrid", "repaymentMetricGrid", "costBreakdownBar", "comparison", "breakdownBody",
+      "downloadCsv", "printPage", "targetLoanField", "purchaseEquityField",
+      "immobilienCode", "bankangebotCode", "recordNote", "recordStatusBadge", "recordDisplayName", "recordSourceInfo", "recordModifiedInfo",
+      "exportRecordJson", "importRecordJson", "newBlankRecord", "addCurrentToComparison", "recordImportFile",
+      "comparisonAddCurrent", "comparisonImportJson", "comparisonClear", "comparisonImportFiles", "languageSelect"
+    ];
+
+    const el = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+
+    const STORAGE_KEY = "germanMortgageCalculatorComparisonBasketV1";
+    let defaultFormState = null;
+
+    function getLocale() {
+      return LOCALES[currentLanguage] || LOCALES.de;
+    }
+
+    function safeNumber(value, fallback = 0) {
+      const number = Number(value);
+      return Number.isFinite(number) ? number : fallback;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function formatMoney(value, cents = false) {
+      const clean = Number.isFinite(value) ? value : 0;
+      return new Intl.NumberFormat(getLocale(), {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: cents ? 2 : 0,
+        maximumFractionDigits: cents ? 2 : 0
+      }).format(clean);
+    }
+
+    function formatPercent(value) {
+      const clean = Number.isFinite(value) ? value : 0;
+      return `${new Intl.NumberFormat(getLocale(), { maximumFractionDigits: 2 }).format(clean)} %`;
+    }
+
+    function formatMonths(months) {
+      if (!Number.isFinite(months) || months <= 0) return t("notPaidWithinSimulation");
+      const years = Math.floor((months - 1) / 12);
+      const month = ((months - 1) % 12) + 1;
+      return t("yearsMonths", { years, month });
+    }
+
+    function getMetadata() {
+      const immobilienCode = el.immobilienCode.value.trim();
+      const bankangebotCode = el.bankangebotCode.value.trim();
+      return {
+        immobilienCode,
+        bankangebotCode,
+        displayName: immobilienCode && bankangebotCode ? `${immobilienCode}__${bankangebotCode}` : "",
+        note: el.recordNote.value.trim()
+      };
+    }
+
+    function validateRecordMetadata() {
+      const metadata = getMetadata();
+      if (!metadata.immobilienCode) return { ok: false, message: t("metadataPropertyRequired") };
+      if (!metadata.bankangebotCode) return { ok: false, message: t("metadataBankRequired") };
+      return { ok: true, metadata };
+    }
+
+    function sanitizeFileNamePart(value) {
+      return String(value || "")
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^A-Za-z0-9_.-]/g, "") || "record";
+    }
+
+    function formatDateStamp(date = new Date()) {
+      const pad = (value) => String(value).padStart(2, "0");
+      return `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}-${pad(date.getHours())}${pad(date.getMinutes())}`;
+    }
+
+    function generateRecordFileName(copy = false) {
+      const metadata = getMetadata();
+      const base = `${sanitizeFileNamePart(metadata.immobilienCode)}__${sanitizeFileNamePart(metadata.bankangebotCode)}`;
+      return `${base}${copy ? `__copy-${formatDateStamp()}` : ""}.json`;
+    }
+
+    function getSelectedRadioValue(name, fallback) {
+      return document.querySelector(`input[name='${name}']:checked`)?.value || fallback;
+    }
+
+    function setSelectedRadioValue(name, value, fallback) {
+      const targetValue = value || fallback;
+      document.querySelectorAll(`input[name='${name}']`).forEach((node) => {
+        node.checked = node.value === targetValue;
+      });
+    }
+
+    function getCurrentInputState() {
+      const input = parseInputs();
+      return {
+        purchase: {
+          ...input.purchase,
+          advancedTax: el.advancedTax.checked,
+          brokerPreset: el.brokerPreset.value
+        },
+        loan: { ...input.loan },
+        sondertilgung: { ...input.sondertilgung },
+        earlyRepayment: { ...input.earlyRepayment }
+      };
+    }
+
+    function buildCalculatedSnapshot(result = state.lastResult) {
+      if (!result) return {};
+      const { input, equity, loan, simulation } = result;
+      const early = simulation.earlyRepaymentResult;
+      return {
+        kaufpreis: input.purchase.price,
+        kaufnebenkosten: equity.kaufnebenkosten,
+        eigenkapitalFuerBank: equity.bankEquity,
+        eigenkapitalbedarfFuerKauf: equity.eigenkapitalbedarfFuerKauf,
+        darlehensbetrag: equity.bankLoanNeeded,
+        bankLoanNeeded: equity.bankLoanNeeded,
+        beleihungsauslauf: equity.beleihungsauslauf,
+        liquidFundsTotal: input.purchase.liquidFundsTotal,
+        minimumReserve: null,
+        verbleibendeLiquiditaet: equity.verbleibendeLiquiditaet,
+        reserveAbstand: null,
+        monthlyRate: loan.monthlyRate,
+        sollzinsPct: loan.interestRate,
+        tilgungPct: loan.initialTilgung,
+        sondertilgungAnnual: loan.annualSpecialPayment,
+        zinsbindungYears: input.loan.zinsbindungYears,
+        simulationYears: input.loan.simulationYears,
+        restschuldAfterZinsbindung: simulation.restschuldAfterZinsbindung,
+        totalInterestUntilPayoff: simulation.totalInterestUntilPayoff,
+        interestUntilZinsbindung: simulation.interestUntilZinsbindung,
+        payoffYear: simulation.payoffYear,
+        payoffMonth: simulation.payoffMonth,
+        earlyRepayment: {
+          enabled: Boolean(early?.active),
+          year: early?.active ? early.year : null,
+          penaltyModel: input.earlyRepayment.penaltyMode,
+          penaltyAmount: early?.active ? early.penaltyAmount : 0,
+          restschuldAtAblösung: early?.active ? early.restschuldAtAblösung : null,
+          ablösebetrag: early?.active ? early.abloesebetrag : null,
+          interestUntilAblösung: early?.active ? early.interestUntilAblösung : null
+        }
+      };
+    }
+
+    function buildRecordPayload(options = {}) {
+      recalculate();
+      const now = new Date().toISOString();
+      const metadata = getMetadata();
+      return {
+        schemaVersion: 1,
+        app: "GermanMortgageCalculator",
+        createdAt: state.currentRecordCreatedAt || now,
+        savedAt: now,
+        metadata,
+        inputState: getCurrentInputState(),
+        calculatedSnapshot: buildCalculatedSnapshot(),
+        versionInfo: {
+          schemaVersion: 1,
+          exportedAsCopy: Boolean(options.copy)
+        }
+      };
+    }
+
+    function deterministicStringify(value) {
+      if (value === null || typeof value !== "object") return JSON.stringify(value);
+      if (Array.isArray(value)) return `[${value.map(deterministicStringify).join(",")}]`;
+      return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${deterministicStringify(value[key])}`).join(",")}}`;
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[char]));
+    }
+
+    function computeSimpleHash(str) {
+      let hash = 2166136261;
+      for (let index = 0; index < str.length; index += 1) {
+        hash ^= str.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return (hash >>> 0).toString(16);
+    }
+
+    function normalizeRecordForHash(metadata, inputState) {
+      return deterministicStringify({ metadata, inputState });
+    }
+
+    function normalizeCurrentRecordForHash() {
+      return normalizeRecordForHash(getMetadata(), getCurrentInputState());
+    }
+
+    function renderRecordStatus() {
+      const metadata = getMetadata();
+      const stateLabel = {
+        empty: t("recordStatusEmpty"),
+        loaded: t("recordStatusLoaded"),
+        modified: t("recordStatusModified"),
+        saved: t("recordStatusSaved")
+      }[state.recordState.status] || t("recordStatusEmpty");
+      el.recordStatusBadge.textContent = stateLabel;
+      el.recordStatusBadge.className = `status-badge ${state.recordState.status}`;
+      el.recordDisplayName.textContent = metadata.displayName || t("unnamedRecord");
+      el.recordSourceInfo.textContent = state.recordState.sourceFileName ? t("sourceFile", { file: state.recordState.sourceFileName }) : t("noFileLoaded");
+      const nameChanged = state.recordState.baselineDisplayName && metadata.displayName && metadata.displayName !== state.recordState.baselineDisplayName;
+      if (state.recordState.status === "modified" && nameChanged) {
+        el.recordModifiedInfo.textContent = t("recordNameChanged");
+      } else if (state.recordState.status === "modified") {
+        el.recordModifiedInfo.textContent = t("recordModifiedUnsaved");
+      } else if (state.recordState.savedAt) {
+        el.recordModifiedInfo.textContent = t("savedAt", { time: new Date(state.recordState.savedAt).toLocaleString(getLocale()) });
+      } else {
+        el.recordModifiedInfo.textContent = "";
+      }
+    }
+
+    function markModifiedIfNeeded() {
+      if (state.isLoadingRecord) return;
+      const currentHash = computeSimpleHash(normalizeCurrentRecordForHash());
+      const now = new Date().toISOString();
+      if (!state.recordState.baselineHash) {
+        state.recordState.status = "modified";
+        state.recordState.lastModifiedAt = now;
+      } else if (currentHash !== state.recordState.baselineHash) {
+        state.recordState.status = "modified";
+        state.recordState.lastModifiedAt = now;
+      } else if (state.recordState.status === "modified") {
+        state.recordState.status = state.recordState.sourceFileName ? "loaded" : "saved";
+      }
+      renderRecordStatus();
+    }
+
+    function downloadJSON(payload, filename) {
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportRecordJSON(copy = false) {
+      const validation = validateRecordMetadata();
+      if (!validation.ok) {
+        alert(validation.message);
+        return;
+      }
+      const payload = buildRecordPayload({ copy });
+      const filename = generateRecordFileName(copy);
+      downloadJSON(payload, filename);
+      const baselineHash = computeSimpleHash(normalizeCurrentRecordForHash());
+      state.currentRecordCreatedAt = payload.createdAt;
+      state.recordState = {
+        ...state.recordState,
+        status: "saved",
+        sourceFileName: filename,
+        savedAt: payload.savedAt,
+        lastModifiedAt: null,
+        baselineHash,
+        baselineDisplayName: payload.metadata.displayName
+      };
+      renderRecordStatus();
+    }
+
+    function validateRecordSchema(record) {
+      if (!record || record.schemaVersion !== 1 || record.app !== "GermanMortgageCalculator") {
+        return { ok: false, message: t("invalidRecordFormat") };
+      }
+      return { ok: true };
+    }
+
+    function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ""));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsText(file);
+      });
+    }
+
+    async function importRecordFromFile(file) {
+      try {
+        const text = await readFileAsText(file);
+        const record = JSON.parse(text);
+        const validation = validateRecordSchema(record);
+        if (!validation.ok) throw new Error(validation.message);
+        return { record, fileName: file.name, missingFields: hasMissingRecordFields(record) };
+      } catch (error) {
+        throw new Error(error.message === t("invalidRecordFormat") ? error.message : t("cannotReadJson"));
+      }
+    }
+
+    function hasMissingRecordFields(record) {
+      return !record.metadata || !record.inputState || !record.inputState.purchase || !record.inputState.loan || !record.inputState.sondertilgung || !record.inputState.earlyRepayment;
+    }
+
+    function parseInputs() {
+      const kapitalMode = document.querySelector("input[name='equityMode']:checked")?.value || "targetLoan";
+      const calculationMode = document.querySelector("input[name='calcMode']:checked")?.value || "rateFromTilgung";
+      const specialMonth = Math.round(safeNumber(el.specialMonth.value, 12));
+      const simulationYears = clamp(Math.round(safeNumber(el.simulationYears.value, 30)), 1, 80);
+      const earlyYear = clamp(Math.round(safeNumber(el.earlyYear.value, 5)), 1, simulationYears);
+
+      const input = {
+        purchase: {
+          price: Math.max(0, safeNumber(el.purchasePrice.value)),
+          kapitalMode,
+          equityMode: kapitalMode,
+          targetLoanAmount: Math.max(0, safeNumber(el.targetLoanAmount.value)),
+          purchaseEquityBudget: Math.max(0, safeNumber(el.purchaseEquityBudget.value)),
+          liquidFundsTotal: Math.max(0, safeNumber(el.liquidFundsTotal.value)),
+          grunderwerbsteuerPct: Math.max(0, safeNumber(el.transferTaxRate.value, 6.5)),
+          notarGrundbuchPct: Math.max(0, safeNumber(el.notaryRate.value, 2)),
+          maklerPct: Math.max(0, safeNumber(el.brokerRate.value)),
+          fixedExtraCosts: Math.max(0, safeNumber(el.fixedExtraCosts.value))
+        },
+        loan: {
+          sollzinsPct: Math.max(0, safeNumber(el.interestRate.value, 4)),
+          tilgungPct: Math.max(0, safeNumber(el.initialTilgung.value, 1.5)),
+          monthlyRate: Math.max(0, safeNumber(el.monthlyRate.value)),
+          calculationMode,
+          zinsbindungYears: Math.max(1, Math.round(safeNumber(el.fixedYears.value, 10))),
+          simulationYears
+        },
+        sondertilgung: {
+          mode: el.specialOption.value,
+          customAnnualAmount: Math.max(0, safeNumber(el.specialCustomAmount.value)),
+          executionMonth: clamp(specialMonth, 1, 12)
+        },
+        earlyRepayment: {
+          enabled: el.earlyEnabled.checked,
+          year: earlyYear,
+          penaltyMode: el.penaltyMode.value,
+          penaltyPercent: Math.max(0, safeNumber(el.penaltyPercent.value, 2)),
+          fixedPenaltyAmount: Math.max(0, safeNumber(el.fixedPenaltyAmount.value))
+        }
+      };
+
+      state.purchase = input.purchase;
+      state.loan = input.loan;
+      state.sondertilgung = input.sondertilgung;
+      state.earlyRepayment = input.earlyRepayment;
+      return input;
+    }
+
+    function captureDefaultFormState() {
+      const fields = {};
+      document.querySelectorAll("input, select").forEach((node) => {
+        if (node.type === "file" || node.id === "languageSelect") return;
+        const key = node.type === "radio" ? `${node.name}:${node.value}` : node.id || node.name || node.value;
+        fields[key] = {
+          value: node.value,
+          checked: node.checked,
+          readOnly: node.readOnly
+        };
+      });
+      return fields;
+    }
+
+    function restoreDefaultFormState() {
+      if (!defaultFormState) return;
+      state.isLoadingRecord = true;
+      document.querySelectorAll("input, select").forEach((node) => {
+        if (node.type === "file" || node.id === "languageSelect") return;
+        const key = node.type === "radio" ? `${node.name}:${node.value}` : node.id || node.name || node.value;
+        const defaults = defaultFormState[key];
+        if (!defaults) return;
+        node.value = defaults.value;
+        node.checked = defaults.checked;
+        node.readOnly = defaults.readOnly;
+      });
+      el.immobilienCode.value = "";
+      el.bankangebotCode.value = "";
+      el.recordNote.value = "";
+      state.currentRecordCreatedAt = null;
+      state.recordState = {
+        status: "empty",
+        sourceFileName: null,
+        loadedAt: null,
+        savedAt: null,
+        lastModifiedAt: null,
+        baselineHash: null,
+        baselineDisplayName: null
+      };
+      state.isLoadingRecord = false;
+      recalculate();
+      renderRecordStatus();
+    }
+
+    function setInputValue(node, value) {
+      if (!node || value === undefined || value === null) return;
+      node.value = String(value);
+    }
+
+    function setBrokerPresetFromState(purchase) {
+      const savedPreset = purchase.brokerPreset;
+      const maklerPct = purchase.maklerPct ?? 0;
+      const knownPreset = [...el.brokerPreset.options].some((option) => option.value === String(savedPreset));
+      if (knownPreset) {
+        el.brokerPreset.value = String(savedPreset);
+      } else {
+        const knownMakler = [...el.brokerPreset.options].some((option) => option.value === String(maklerPct));
+        el.brokerPreset.value = knownMakler ? String(maklerPct) : "custom";
+      }
+      el.brokerRate.value = String(maklerPct);
+    }
+
+    function applyRecordToState(record) {
+      const inputState = record.inputState || {};
+      const purchase = inputState.purchase || {};
+      const loan = inputState.loan || {};
+      const sondertilgung = inputState.sondertilgung || {};
+      const earlyRepayment = inputState.earlyRepayment || {};
+      const metadata = record.metadata || {};
+
+      state.isLoadingRecord = true;
+      restoreDefaultFormState();
+      state.isLoadingRecord = true;
+
+      el.immobilienCode.value = metadata.immobilienCode || "";
+      el.bankangebotCode.value = metadata.bankangebotCode || "";
+      el.recordNote.value = metadata.note || "";
+      setSelectedRadioValue("equityMode", purchase.kapitalMode || purchase.equityMode, "targetLoan");
+      setSelectedRadioValue("calcMode", loan.calculationMode, "rateFromTilgung");
+      setInputValue(el.purchasePrice, purchase.price);
+      setInputValue(el.targetLoanAmount, purchase.targetLoanAmount);
+      setInputValue(el.purchaseEquityBudget, purchase.purchaseEquityBudget);
+      setInputValue(el.liquidFundsTotal, purchase.liquidFundsTotal);
+      el.advancedTax.checked = Boolean(purchase.advancedTax);
+      setInputValue(el.transferTaxRate, purchase.grunderwerbsteuerPct);
+      setInputValue(el.notaryRate, purchase.notarGrundbuchPct);
+      setBrokerPresetFromState(purchase);
+      setInputValue(el.fixedExtraCosts, purchase.fixedExtraCosts);
+      setInputValue(el.interestRate, loan.sollzinsPct);
+      setInputValue(el.initialTilgung, loan.tilgungPct);
+      setInputValue(el.monthlyRate, loan.monthlyRate);
+      setInputValue(el.fixedYears, loan.zinsbindungYears);
+      setInputValue(el.simulationYears, loan.simulationYears);
+      if (sondertilgung.mode) el.specialOption.value = sondertilgung.mode;
+      setInputValue(el.specialCustomAmount, sondertilgung.customAnnualAmount);
+      setInputValue(el.specialMonth, sondertilgung.executionMonth);
+      el.earlyEnabled.checked = Boolean(earlyRepayment.enabled);
+      setInputValue(el.earlyYear, earlyRepayment.year);
+      if (earlyRepayment.penaltyMode) el.penaltyMode.value = earlyRepayment.penaltyMode;
+      setInputValue(el.penaltyPercent, earlyRepayment.penaltyPercent);
+      setInputValue(el.fixedPenaltyAmount, earlyRepayment.fixedPenaltyAmount);
+      state.currentRecordCreatedAt = record.createdAt || null;
+
+      state.isLoadingRecord = false;
+      recalculate();
+    }
+
+    async function loadRecordFromFile(file) {
+      if (state.recordState.status === "modified" && !confirm(t("confirmLoadUnsaved"))) return;
+      try {
+        const { record, fileName, missingFields } = await importRecordFromFile(file);
+        applyRecordToState(record);
+        const baselineHash = computeSimpleHash(normalizeCurrentRecordForHash());
+        const loadedAt = new Date().toISOString();
+        state.recordState = {
+          status: "loaded",
+          sourceFileName: fileName,
+          loadedAt,
+          savedAt: record.savedAt || null,
+          lastModifiedAt: null,
+          baselineHash,
+          baselineDisplayName: getMetadata().displayName
+        };
+        renderRecordStatus();
+        if (missingFields) alert(t("jsonLoadedWithDefaults"));
+      } catch (error) {
+        alert(error.message || t("cannotReadJson"));
+      }
+    }
+
+    function newBlankRecord() {
+      if (state.recordState.status === "modified" && !confirm(t("confirmNewUnsaved"))) return;
+      restoreDefaultFormState();
+    }
+
+    function createComparisonEntryFromPayload(payload, sourceFileName = null) {
+      return {
+        id: `${payload.metadata.displayName || "record"}-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        sourceFileName,
+        metadata: payload.metadata,
+        inputState: payload.inputState,
+        calculatedSnapshot: payload.calculatedSnapshot || {},
+        recordPayload: payload
+      };
+    }
+
+    function persistComparisonBasket() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.comparisonBasket));
+      } catch (error) {
+        // localStorage is optional; ignore quota/privacy failures.
+      }
+    }
+
+    function restoreComparisonBasket() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) return;
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) state.comparisonBasket = parsed.slice(0, 8);
+      } catch (error) {
+        state.comparisonBasket = [];
+      }
+    }
+
+    function addCurrentRecordToComparison() {
+      const validation = validateRecordMetadata();
+      if (!validation.ok) {
+        alert(t("fillCodesFirst"));
+        return;
+      }
+      const payload = buildRecordPayload();
+      state.comparisonBasket.push(createComparisonEntryFromPayload(payload, state.recordState.sourceFileName));
+      persistComparisonBasket();
+      renderComparisonBasket();
+    }
+
+    async function importRecordsToComparison(files) {
+      const imported = [];
+      for (const file of files) {
+        try {
+          const { record, fileName } = await importRecordFromFile(file);
+          imported.push(createComparisonEntryFromPayload(record, fileName));
+        } catch (error) {
+          alert(`${file.name}: ${error.message || t("cannotReadJson")}`);
+        }
+      }
+      if (imported.length) {
+        state.comparisonBasket.push(...imported);
+        persistComparisonBasket();
+        renderComparisonBasket();
+      }
+    }
+
+    function removeComparisonRecord(index) {
+      state.comparisonBasket.splice(index, 1);
+      persistComparisonBasket();
+      renderComparisonBasket();
+    }
+
+    function clearComparisonBasket() {
+      state.comparisonBasket = [];
+      persistComparisonBasket();
+      renderComparisonBasket();
+    }
+
+    function loadComparisonRecordIntoCalculator(index) {
+      const entry = state.comparisonBasket[index];
+      if (!entry) return;
+      if (state.recordState.status === "modified" && !confirm(t("confirmLoadUnsaved"))) return;
+      applyRecordToState(entry.recordPayload);
+      const baselineHash = computeSimpleHash(normalizeCurrentRecordForHash());
+      state.recordState = {
+        status: "loaded",
+        sourceFileName: entry.sourceFileName,
+        loadedAt: new Date().toISOString(),
+        savedAt: entry.recordPayload.savedAt || null,
+        lastModifiedAt: null,
+        baselineHash,
+        baselineDisplayName: getMetadata().displayName
+      };
+      renderRecordStatus();
+    }
+
+    function formatNullableMoney(value) {
+      return Number.isFinite(value) ? formatMoney(value) : "-";
+    }
+
+    function formatNullablePercent(value) {
+      return Number.isFinite(value) ? formatPercent(value) : "-";
+    }
+
+    function formatComparisonValue(value, type = "text") {
+      if (type === "money") return formatNullableMoney(value);
+      if (type === "percent") return formatNullablePercent(value);
+      if (type === "years") return Number.isFinite(value) ? t("yearValue", { value }) : "-";
+      if (type === "months") return formatMonths(value);
+      if (type === "boolean") return value ? t("valueYes") : t("valueNo");
+      return value === null || value === undefined || value === "" ? "-" : String(value);
+    }
+
+    function renderComparisonBasket() {
+      if (!state.comparisonBasket.length) {
+        el.comparison.innerHTML = `<div class="warning">${t("noComparisonRecords")}</div>`;
+        return;
+      }
+
+      const metrics = [
+        [t("purchasePriceMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.kaufpreis, "money")],
+        [t("purchaseCostsMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.kaufnebenkosten, "money")],
+        [t("bankLoanMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.bankLoanNeeded ?? entry.calculatedSnapshot.darlehensbetrag, "money")],
+        [t("bankEquityMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.eigenkapitalFuerBank, "money")],
+        [t("equityNeedCard"), (entry) => formatComparisonValue(entry.calculatedSnapshot.eigenkapitalbedarfFuerKauf, "money")],
+        [t("remainingLiquidityMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.verbleibendeLiquiditaet, "money")],
+        [t("reserveDistanceMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.reserveAbstand, "money")],
+        [t("interestRateMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.sollzinsPct, "percent")],
+        [t("initialRepaymentMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.tilgungPct, "percent")],
+        [t("monthlyRateMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.monthlyRate, "money")],
+        [t("annualSpecialMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.sondertilgungAnnual, "money")],
+        [t("fixedYearsLabel"), (entry) => formatComparisonValue(entry.calculatedSnapshot.zinsbindungYears, "years")],
+        [t("restAfterFixedMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.restschuldAfterZinsbindung, "money")],
+        [t("totalInterestUntilPayoff"), (entry) => formatComparisonValue(entry.calculatedSnapshot.totalInterestUntilPayoff, "money")],
+        [t("totalInterestFixedMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.interestUntilZinsbindung, "money")],
+        [t("termUntilPayoffMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.payoffMonth, "months")],
+        [t("earlyEnabledMetric"), (entry) => formatComparisonValue(entry.calculatedSnapshot.earlyRepayment?.enabled, "boolean")],
+        [t("payoffYearMetric"), (entry) => entry.calculatedSnapshot.earlyRepayment?.enabled ? formatComparisonValue(entry.calculatedSnapshot.earlyRepayment.year, "years") : "-"],
+        [t("penaltyMetric"), (entry) => entry.calculatedSnapshot.earlyRepayment?.enabled ? formatComparisonValue(entry.calculatedSnapshot.earlyRepayment.penaltyAmount, "money") : "-"],
+        [t("payoffAmountMetric"), (entry) => entry.calculatedSnapshot.earlyRepayment?.enabled ? formatComparisonValue(entry.calculatedSnapshot.earlyRepayment.ablösebetrag, "money") : "-"],
+        [t("noteMetric"), (entry) => entry.metadata.note || "-"]
+      ];
+
+      const header = `<tr><th>${t("metricHeader")}</th>${state.comparisonBasket.map((entry, index) => `
+        <th>
+          <div class="comparison-record-head">
+            <strong>${escapeHTML(entry.metadata.displayName || t("unnamedRecord"))}</strong>
+            <small>${escapeHTML(entry.metadata.note || entry.sourceFileName || t("jsonRecord"))}</small>
+            <div class="comparison-record-actions">
+              <button type="button" data-load-comparison="${index}">${t("loadButton")}</button>
+              <button type="button" class="secondary" data-remove-comparison="${index}">${t("removeButton")}</button>
+            </div>
+          </div>
+        </th>`).join("")}</tr>`;
+      const rows = metrics.map(([label, getter]) => `<tr><td>${escapeHTML(label)}</td>${state.comparisonBasket.map((entry) => `<td>${escapeHTML(getter(entry))}</td>`).join("")}</tr>`).join("");
+      el.comparison.innerHTML = `<table class="comparison-table">${header}${rows}</table>`;
+    }
+
+    function calculatePurchaseCosts(input) {
+      return calculateCapitalStructure(input);
+    }
+
+    function calculateEquityStrategy(inputs) {
+      return calculateCapitalStructure(inputs);
+    }
+
+    function calculateCapitalStructure(inputs) {
+      const purchase = inputs.purchase || inputs;
+      const kaufpreis = purchase.price ?? purchase.purchasePrice ?? 0;
+      const grunderwerbsteuer = kaufpreis * (purchase.grunderwerbsteuerPct ?? purchase.transferTaxRate ?? 0) / 100;
+      const notarGrundbuch = kaufpreis * (purchase.notarGrundbuchPct ?? purchase.notaryRate ?? 0) / 100;
+      const makler = kaufpreis * (purchase.maklerPct ?? purchase.brokerRate ?? 0) / 100;
+      const fixedExtraCosts = purchase.fixedExtraCosts ?? 0;
+      const kaufnebenkosten = grunderwerbsteuer + notarGrundbuch + makler + fixedExtraCosts;
+      const kapitalMode = purchase.kapitalMode || purchase.equityMode || "targetLoan";
+      const warnings = [];
+      let eigenkapitalFuerBank;
+      let eigenkapitalbedarfFuerKauf;
+      let darlehensbetrag;
+
+      if (kaufpreis <= 0) warnings.push({ type: "danger", text: t("warningPurchasePricePositive") });
+
+      if (kapitalMode === "targetLoan") {
+        const rawTargetLoan = Math.max(0, purchase.targetLoanAmount ?? 0);
+        if (rawTargetLoan > kaufpreis) warnings.push({ type: "warning", text: t("warningLoanCapped") });
+        darlehensbetrag = clamp(rawTargetLoan, 0, kaufpreis);
+        eigenkapitalFuerBank = Math.max(0, kaufpreis - darlehensbetrag);
+        eigenkapitalbedarfFuerKauf = eigenkapitalFuerBank + kaufnebenkosten;
+        if (darlehensbetrag >= kaufpreis * 0.98 && kaufpreis > 0) warnings.push({ type: "warning", text: t("warningAlmostNoBankEquity") });
+      } else {
+        eigenkapitalbedarfFuerKauf = Math.max(0, purchase.purchaseEquityBudget ?? 0);
+        eigenkapitalFuerBank = Math.max(0, eigenkapitalbedarfFuerKauf - kaufnebenkosten);
+        darlehensbetrag = Math.max(0, kaufpreis - eigenkapitalFuerBank);
+        if (eigenkapitalbedarfFuerKauf < kaufnebenkosten) warnings.push({ type: "danger", text: t("warningEquityBelowCosts") });
+      }
+
+      const liquidFundsTotal = Math.max(0, purchase.liquidFundsTotal ?? 0);
+      const verbleibendeLiquiditaet = liquidFundsTotal - eigenkapitalbedarfFuerKauf;
+      const cashGap = Math.max(0, -verbleibendeLiquiditaet);
+      if (verbleibendeLiquiditaet < 0) {
+        warnings.push({ type: "danger", text: t("warningInsufficientCash") });
+      }
+
+      const cappedBankEquity = clamp(eigenkapitalFuerBank, 0, kaufpreis);
+      darlehensbetrag = Math.max(0, darlehensbetrag);
+      const beleihungsauslauf = kaufpreis > 0 ? darlehensbetrag / kaufpreis * 100 : 0;
+      const costsPercent = kaufpreis > 0 ? kaufnebenkosten / kaufpreis * 100 : 0;
+
+      return {
+        kaufpreis,
+        grunderwerbsteuer,
+        notarGrundbuch,
+        makler,
+        kaufnebenkosten,
+        totalCosts: kaufnebenkosten,
+        equityAfterKaufnebenkosten: null,
+        kapitalMode,
+        equityMode: kapitalMode,
+        eigenkapitalFuerBank: cappedBankEquity,
+        bankEquity: cappedBankEquity,
+        uncappedBankEquity: eigenkapitalFuerBank,
+        requiredTotalCash: eigenkapitalbedarfFuerKauf,
+        eigenkapitalbedarfFuerKauf,
+        insgesamtBenoetigtesEigenkapital: eigenkapitalbedarfFuerKauf,
+        darlehensbetragPropertyOnly: darlehensbetrag,
+        darlehensbetrag,
+        darlehensbetragForAmortization: darlehensbetrag,
+        bankLoanNeeded: darlehensbetrag,
+        loanAmount: darlehensbetrag,
+        equityGap: kapitalMode === "purchaseEquity" ? Math.max(0, kaufnebenkosten - eigenkapitalbedarfFuerKauf) : 0,
+        equityCoversCosts: eigenkapitalbedarfFuerKauf >= kaufnebenkosten,
+        beleihungsauslauf,
+        loanToValue: beleihungsauslauf,
+        liquidFundsTotal,
+        verbleibendeLiquiditaet,
+        cashGap,
+        costsPercent,
+        warnings
+      };
+    }
+
+    function deriveLoanValues(input, equity) {
+      const warnings = [];
+      const loanAmount = equity.darlehensbetragForAmortization ?? equity.darlehensbetrag;
+      const interestRate = Math.max(0, input.loan.sollzinsPct);
+      let initialTilgung = input.loan.tilgungPct;
+      let monthlyRate = input.loan.monthlyRate;
+
+      if (loanAmount <= 0) {
+        warnings.push({ type: "ok", text: t("warningNoLoan") });
+        return { sollzinsPct: interestRate, tilgungPct: initialTilgung, interestRate, initialTilgung, monthlyRate: 0, annualRate: 0, annualSpecialPayment: 0, warnings };
+      }
+
+      if (input.loan.calculationMode === "rateFromTilgung") {
+        // Standard annual-rate approximation for German initial Annuität.
+        monthlyRate = loanAmount * (interestRate + initialTilgung) / 100 / 12;
+      } else if (input.loan.calculationMode === "tilgungFromRate") {
+        if (monthlyRate <= 0) warnings.push({ type: "danger", text: t("warningMonthlyRatePositive") });
+        initialTilgung = (monthlyRate * 12 / loanAmount * 100) - interestRate;
+        if (initialTilgung <= 0) warnings.push({ type: "danger", text: t("warningRepaymentNotEffective") });
+        if (monthlyRate < loanAmount * interestRate / 100 / 12) warnings.push({ type: "danger", text: t("warningBelowMonthlyInterest") });
+      }
+
+      return {
+        sollzinsPct: interestRate,
+        tilgungPct: initialTilgung,
+        interestRate,
+        initialTilgung,
+        monthlyRate: Math.max(0, monthlyRate),
+        annualRate: Math.max(0, monthlyRate * 12),
+        annualSpecialPayment: getAnnualSpecialPayment(input, loanAmount),
+        warnings
+      };
+    }
+
+    function getAnnualSpecialPayment(input, initialLoanAmount) {
+      if (input.sondertilgung.mode === "5") return initialLoanAmount * 0.05;
+      if (input.sondertilgung.mode === "10") return initialLoanAmount * 0.10;
+      if (input.sondertilgung.mode === "custom") return input.sondertilgung.customAnnualAmount;
+      return 0;
+    }
+
+    function simulateAmortization(input, equity, loan) {
+      const warnings = [...loan.warnings];
+      const monthlyRows = [];
+      const initialDebt = equity.darlehensbetragForAmortization ?? equity.darlehensbetrag;
+      let restDebt = initialDebt;
+      let totalInterest = 0;
+      let totalRegularPayments = 0;
+      let totalSondertilgung = 0;
+      let payoffMonth = null;
+      let restschuldAfterZinsbindung = initialDebt;
+      let interestUntilZinsbindung = 0;
+      const monthlyInterestRate = Math.max(0, loan.interestRate) / 100 / 12;
+      const maxMonths = input.loan.simulationYears * 12;
+      const zinsbindungMonth = input.loan.zinsbindungYears * 12;
+
+      if (input.purchase.price <= 0) {
+        warnings.push({ type: "danger", text: t("warningNoLoanCalculation") });
+        return buildAmortizationResult(input, monthlyRows, warnings, initialDebt, 0, 0, 0, null, initialDebt, 0, loan);
+      }
+
+      if (initialDebt <= 0) {
+        return buildAmortizationResult(input, monthlyRows, warnings, 0, 0, 0, 0, 0, 0, 0, loan);
+      }
+
+      if (loan.interestRate < 0 || loan.initialTilgung < 0) {
+        return buildAmortizationResult(input, monthlyRows, warnings, initialDebt, 0, 0, 0, null, initialDebt, 0, loan);
+      }
+
+      for (let monthIndex = 1; monthIndex <= maxMonths && restDebt > 0.004; monthIndex += 1) {
+        const year = Math.ceil(monthIndex / 12);
+        const monthOfYear = ((monthIndex - 1) % 12) + 1;
+        const startingDebt = restDebt;
+        const interest = restDebt * monthlyInterestRate;
+
+        if (loan.monthlyRate <= interest + 0.0001) {
+          warnings.push({ type: "danger", text: t("warningPaymentBelowInterest") });
+          break;
+        }
+
+        const regularPayment = Math.min(loan.monthlyRate, restDebt + interest);
+        const principal = Math.min(restDebt, Math.max(0, regularPayment - interest));
+        restDebt = Math.max(0, restDebt - principal);
+
+        let specialPayment = 0;
+        if (monthOfYear === input.sondertilgung.executionMonth && loan.annualSpecialPayment > 0 && restDebt > 0) {
+          specialPayment = Math.min(loan.annualSpecialPayment, restDebt);
+          restDebt = Math.max(0, restDebt - specialPayment);
+        }
+
+        totalInterest += interest;
+        totalRegularPayments += regularPayment;
+        totalSondertilgung += specialPayment;
+
+        monthlyRows.push({ monthIndex, year, monthOfYear, startingDebt, interest, regularPayment, principal, specialPayment, endingDebt: restDebt });
+
+        if (monthIndex <= zinsbindungMonth) interestUntilZinsbindung += interest;
+        if (monthIndex === zinsbindungMonth) restschuldAfterZinsbindung = restDebt;
+
+        if (restDebt <= 0.004) {
+          restDebt = 0;
+          payoffMonth = monthIndex;
+          if (monthIndex <= zinsbindungMonth) restschuldAfterZinsbindung = 0;
+          break;
+        }
+      }
+
+      if (monthlyRows.length < zinsbindungMonth && payoffMonth === null) {
+        restschuldAfterZinsbindung = monthlyRows.at(-1)?.endingDebt ?? initialDebt;
+      } else if (monthlyRows.length >= zinsbindungMonth) {
+        restschuldAfterZinsbindung = monthlyRows[zinsbindungMonth - 1]?.endingDebt ?? restschuldAfterZinsbindung;
+      }
+
+      return buildAmortizationResult(input, monthlyRows, warnings, initialDebt, totalInterest, totalRegularPayments, totalSondertilgung, payoffMonth, restschuldAfterZinsbindung, interestUntilZinsbindung, loan);
+    }
+
+    function buildAmortizationResult(input, monthlyRows, warnings, initialDebt, totalInterest, totalRegularPayments, totalSondertilgung, payoffMonth, restschuldAfterZinsbindung, interestUntilZinsbindung, loan) {
+      const yearlyRows = buildYearlyBreakdown(input, { monthlyRows, payoffMonth, earlyRepaymentResult: null });
+      const result = {
+        monthlyRows,
+        yearlyRows,
+        payoffMonth,
+        payoffYear: payoffMonth ? Math.ceil(payoffMonth / 12) : null,
+        totalInterestUntilPayoff: totalInterest,
+        totalInterest,
+        totalRegularPaymentsUntilPayoff: totalRegularPayments,
+        totalRegularPayments,
+        totalSondertilgungUntilPayoff: totalSondertilgung,
+        totalSpecialPayments: totalSondertilgung,
+        restschuldAfterZinsbindung,
+        restAfterFixed: restschuldAfterZinsbindung,
+        interestUntilZinsbindung,
+        restschuldByYear: buildRestschuldByYear(initialDebt, monthlyRows),
+        snapshots: buildRestschuldByYear(initialDebt, monthlyRows),
+        earlyRepaymentResult: null,
+        warnings
+      };
+      result.earlyRepaymentResult = calculateEarlyRepayment(result, input.earlyRepayment, input, loan);
+      result.yearlyRows = buildYearlyBreakdown(input, result);
+      return result;
+    }
+
+    function buildRestschuldByYear(initialDebt, monthlyRows) {
+      const map = {};
+      for (let year = 1; year <= 80; year += 1) {
+        const row = monthlyRows[Math.min(year * 12, monthlyRows.length) - 1];
+        map[year] = row ? row.endingDebt : initialDebt;
+      }
+      return map;
+    }
+
+    function calculateEarlyRepayment(amortizationResult, earlyRepaymentSettings, input, loan) {
+      if (!earlyRepaymentSettings.enabled) return { active: false };
+      const year = clamp(Math.round(earlyRepaymentSettings.year), 1, input.loan.simulationYears);
+      const targetMonth = year * 12;
+      const payoffMonth = amortizationResult.payoffMonth;
+      let warning = "";
+
+      if (payoffMonth && targetMonth >= payoffMonth) {
+        return {
+          active: true,
+          year,
+          restschuldAtAblösung: 0,
+          penaltyAmount: 0,
+          abloesebetrag: 0,
+          interestUntilAblösung: amortizationResult.totalInterestUntilPayoff,
+          regularPaymentsUntilAblösung: amortizationResult.totalRegularPaymentsUntilPayoff,
+          sondertilgungUntilAblösung: amortizationResult.totalSondertilgungUntilPayoff,
+          totalPaidUntilAblösung: amortizationResult.totalRegularPaymentsUntilPayoff + amortizationResult.totalSondertilgungUntilPayoff,
+          savedInterestComparedToFullPayoff: 0,
+          netDifferenceComparedToFullPayoff: 0,
+          warning: t("earlyAlreadyPaid")
+        };
+      }
+
+      const rowsUntilAblösung = amortizationResult.monthlyRows.filter((row) => row.monthIndex <= targetMonth);
+      const lastRow = rowsUntilAblösung.at(-1);
+      const restschuldAtAblösung = lastRow ? lastRow.endingDebt : amortizationResult.monthlyRows.at(-1)?.endingDebt ?? 0;
+      const interestUntilAblösung = sum(rowsUntilAblösung, "interest");
+      const regularUntilAblösung = sum(rowsUntilAblösung, "regularPayment");
+      const specialUntilAblösung = sum(rowsUntilAblösung, "specialPayment");
+      const penaltyAmount = calculatePenalty(restschuldAtAblösung, earlyRepaymentSettings);
+      const abloesebetrag = restschuldAtAblösung + penaltyAmount;
+      const totalPaidUntilAblösung = regularUntilAblösung + specialUntilAblösung + abloesebetrag;
+      const savedInterestComparedToFullPayoff = Math.max(0, amortizationResult.totalInterestUntilPayoff - interestUntilAblösung);
+      const fullStrategyPayments = amortizationResult.totalRegularPaymentsUntilPayoff + amortizationResult.totalSondertilgungUntilPayoff;
+      const netDifferenceComparedToFullPayoff = totalPaidUntilAblösung - fullStrategyPayments;
+
+      if (year > input.loan.zinsbindungYears) {
+        warning = t("earlyAfterFixedWarning");
+      } else {
+        warning = t("earlyDuringFixedWarning");
+      }
+
+      return {
+        active: true,
+        year,
+        restschuldAtAblösung,
+        penaltyAmount,
+        abloesebetrag,
+        interestUntilAblösung,
+        regularPaymentsUntilAblösung: regularUntilAblösung,
+        sondertilgungUntilAblösung: specialUntilAblösung,
+        totalPaidUntilAblösung,
+        savedInterestComparedToFullPayoff,
+        extraPenalty: penaltyAmount,
+        netDifferenceComparedToFullPayoff,
+        warning
+      };
+    }
+
+    function calculatePenalty(restschuld, settings) {
+      if (settings.penaltyMode === "none") return 0;
+      if (settings.penaltyMode === "pct1") return restschuld * 0.01;
+      if (settings.penaltyMode === "pct2") return restschuld * 0.02;
+      if (settings.penaltyMode === "pct4") return restschuld * 0.04;
+      if (settings.penaltyMode === "pct8") return restschuld * 0.08;
+      if (settings.penaltyMode === "pct10") return restschuld * 0.10;
+      if (settings.penaltyMode === "customPct") return restschuld * Math.max(0, settings.penaltyPercent) / 100;
+      if (settings.penaltyMode === "fixed") return Math.max(0, settings.fixedPenaltyAmount);
+      return 0;
+    }
+
+    function buildYearlyBreakdown(input, simulation) {
+      const yearly = [];
+      const rows = simulation.monthlyRows || [];
+      const initialDebt = rows[0]?.startingDebt ?? 0;
+      let cumulativeInterest = 0;
+      let cumulativeRegularPrincipal = 0;
+      let cumulativeSondertilgung = 0;
+
+      for (let year = 1; year <= input.loan.simulationYears; year += 1) {
+        const yearRows = rows.filter((row) => row.year === year);
+        if (yearRows.length === 0) break;
+        const first = yearRows[0];
+        const last = yearRows[yearRows.length - 1];
+        const regularPayments = sum(yearRows, "regularPayment");
+        const interestPaid = sum(yearRows, "interest");
+        const principalPaid = sum(yearRows, "principal");
+        const specialPaid = sum(yearRows, "specialPayment");
+        cumulativeInterest += interestPaid;
+        cumulativeRegularPrincipal += principalPaid;
+        cumulativeSondertilgung += specialPaid;
+        const notes = [];
+        let earlyRepaymentMarker = "";
+        let penaltyAmount = 0;
+        const zinsbindungEnds = year === input.loan.zinsbindungYears;
+        const fullPayoff = Boolean(simulation.payoffMonth && Math.ceil(simulation.payoffMonth / 12) === year);
+        let earlyRepayment = false;
+        if (zinsbindungEnds) notes.push(t("noteFixedEnds"));
+        if (fullPayoff) notes.push(t("noteFullyPaid"));
+        if (simulation.earlyRepaymentResult?.active && simulation.earlyRepaymentResult.year === year) {
+          earlyRepayment = true;
+          earlyRepaymentMarker = t("notePlannedPayoff");
+          penaltyAmount = simulation.earlyRepaymentResult.penaltyAmount || 0;
+          const early = simulation.earlyRepaymentResult;
+          const penaltyText = penaltyAmount > 0
+            ? t("penaltyAmountText", { amount: formatMoney(penaltyAmount) })
+            : t("noPenalty");
+          notes.push(t("plannedPayoffNote", { debt: formatMoney(early.restschuldAtAblösung), penalty: penaltyText, payoff: formatMoney(early.abloesebetrag) }));
+        }
+        const restschuldYearEnd = earlyRepayment ? 0 : last.endingDebt;
+        const cumulativePrincipalRepaid = Math.max(0, initialDebt - restschuldYearEnd);
+        const note = notes.join("; ");
+
+        yearly.push({
+          year,
+          startingDebt: first.startingDebt,
+          regularPayments,
+          interestPaid,
+          principalPaid,
+          regularPrincipalRepaid: principalPaid,
+          specialPaid,
+          sondertilgungPaid: specialPaid,
+          endingDebt: last.endingDebt,
+          endingRestschuld: last.endingDebt,
+          restschuldYearEnd,
+          reduction: first.startingDebt - restschuldYearEnd,
+          cumulativeInterest,
+          cumulativeInterestPaid: cumulativeInterest,
+          cumulativeRegularPrincipal,
+          cumulativePrincipal: cumulativePrincipalRepaid,
+          cumulativePrincipalRepaid,
+          cumulativeSondertilgung,
+          zinsbindungEnds,
+          fullPayoff,
+          earlyRepayment,
+          earlyRepaymentMarker,
+          penaltyAmount,
+          note,
+          notes: note
+        });
+
+        if (earlyRepayment || (simulation.payoffMonth && Math.ceil(simulation.payoffMonth / 12) === year)) break;
+      }
+      return yearly;
+    }
+
+    function sum(rows, key) {
+      return rows.reduce((total, row) => total + (Number.isFinite(row[key]) ? row[key] : 0), 0);
+    }
+
+    function renderCostComputed(equity) {
+      const gapAmount = Math.max(equity.equityGap || 0, equity.cashGap || 0);
+      const hasGap = gapAmount > 0;
+      const ratioNote = hasGap ? t("costGapInlineNote", { gap: formatMoney(gapAmount) }) : t("costRatioNote");
+      const items = [
+        [t("costTotalLabel"), formatMoney(equity.kaufnebenkosten), t("costTotalNote"), ""],
+        [t("costRatioLabel"), formatPercent(equity.costsPercent), ratioNote, hasGap ? "warning-metric" : ""]
+      ];
+      el.costComputed.innerHTML = items.map(([label, value, secondary, className]) => `<div class="mini-metric ${className}"><span>${label}</span><strong>${value}</strong><small>${secondary}</small></div>`).join("");
+    }
+
+    function renderCapitalLiquidityLine(equity) {
+      const prefix = equity.verbleibendeLiquiditaet < 0 ? t("liquidityShortPrefix") : t("liquidityRemainPrefix");
+      el.capitalLiquidityLine.textContent = `${prefix} ${formatMoney(Math.abs(equity.verbleibendeLiquiditaet))}.`;
+    }
+
+    function renderSonderComputed(loan) {
+      el.sonderComputed.innerHTML = `<div class="mini-metric"><span>${t("annualSpecialLabel")}</span><strong>${formatMoney(loan.annualSpecialPayment)}</strong><small>${t("annualSpecialNote")}</small></div>`;
+    }
+
+    function renderEarlyCompact(simulation) {
+      const early = simulation.earlyRepaymentResult;
+      if (!early?.active) {
+        el.earlyCompact.innerHTML = `<div class="mini-metric"><span>${t("earlyDisabledLabel")}</span><strong>${t("earlyDisabledValue")}</strong><small>${t("earlyDisabledNote")}</small></div>`;
+        return;
+      }
+      const items = [
+        ["Restschuld zum Ablösezeitpunkt", formatMoney(early.restschuldAtAblösung), t("ordinalYear", { year: early.year })],
+        ["Vorfälligkeitsentschädigung", formatMoney(early.penaltyAmount), t("roughEstimate")],
+        ["Ablösebetrag", formatMoney(early.abloesebetrag), t("restPlusPenalty")]
+      ];
+      el.earlyCompact.innerHTML = items.map(([label, value, secondary]) => `<div class="mini-metric"><span>${label}</span><strong>${value}</strong><small>${secondary}</small></div>`).join("");
+    }
+
+    function getKapitalModeLine(input, equity) {
+      if (input.purchase.kapitalMode === "targetLoan") {
+        return t("kapitalModeTargetLine", { loan: formatMoney(input.purchase.targetLoanAmount), equity: formatMoney(equity.eigenkapitalbedarfFuerKauf) });
+      }
+      if (input.purchase.kapitalMode === "purchaseEquity") {
+        return t("kapitalModeEquityLine", { equity: formatMoney(input.purchase.purchaseEquityBudget), loan: formatMoney(equity.bankLoanNeeded) });
+      }
+      return t("kapitalStructure");
+    }
+
+    function getTotalInterestLabel(simulation) {
+      return simulation.payoffMonth ? t("totalInterestUntilPayoff") : t("totalInterestUntilSimulationEnd");
+    }
+
+    function renderFinancingOverview(result) {
+      const { input, equity, loan, simulation } = result;
+      const early = simulation.earlyRepaymentResult;
+      const financingCost = early?.active ? early.interestUntilAblösung + early.penaltyAmount : simulation.totalInterestUntilPayoff;
+      const totalInterestLabel = getTotalInterestLabel(simulation);
+      const financingCostLabel = early?.active ? t("financingCostWithEarly") : totalInterestLabel;
+      const modeLine = getKapitalModeLine(input, equity);
+      const costDetailLines = early?.active ? `
+        <div class="overview-line"><span>${t("payoffYearMetric")}</span><b>${t("ordinalYear", { year: early.year })}</b></div>
+        <div class="overview-line"><span>${t("interestUntilPayoffMetric")}</span><b>${formatMoney(early.interestUntilAblösung)}</b></div>
+        <div class="overview-line"><span>${t("restDebtAtPayoffMetric")}</span><b>${formatMoney(early.restschuldAtAblösung)}</b></div>
+        <div class="overview-line"><span>Vorfälligkeitsentschädigung</span><b>${formatMoney(early.penaltyAmount)}</b></div>
+        <div class="overview-line"><span>${t("payoffAmountMetric")}</span><b>${formatMoney(early.abloesebetrag)}</b></div>
+      ` : `
+        <div class="overview-line"><span>${t("totalInterestFixedMetric")}</span><b>${formatMoney(simulation.interestUntilZinsbindung)}</b></div>
+        <div class="overview-line"><span>${t("restAfterFixedMetric")}</span><b>${formatMoney(simulation.restschuldAfterZinsbindung)}</b></div>
+        <div class="overview-line"><span>${t("termUntilPayoffMetric")}</span><b>${equity.bankLoanNeeded <= 0 ? t("noLoanNeeded") : formatMonths(simulation.payoffMonth)}</b></div>
+      `;
+
+      el.overviewMajorGrid.innerHTML = `
+        <article class="overview-card highlight-cash">
+          <span>${t("equityNeedCard")}</span>
+          <strong>${formatMoney(equity.eigenkapitalbedarfFuerKauf)}</strong>
+          <div class="overview-lines">
+            <div class="overview-line"><span>${t("purchaseCostsMetric")}</span><b>${formatMoney(equity.kaufnebenkosten)}</b></div>
+            <div class="overview-line"><span>${t("bankEquityMetric")}</span><b>${formatMoney(equity.bankEquity)}</b></div>
+            <div class="overview-line"><span>${t("modeMetric")}</span><b>${modeLine}</b></div>
+          </div>
+        </article>
+        <article class="overview-card highlight-loan">
+          <span>${t("bankLoanCard")}</span>
+          <strong>${equity.bankLoanNeeded <= 0 ? t("noLoanNeeded") : formatMoney(equity.bankLoanNeeded)}</strong>
+          <div class="overview-lines">
+            <div class="overview-line"><span>${t("bankLoanMetric")}</span><b>${formatMoney(equity.bankLoanNeeded)}</b></div>
+            <div class="overview-line"><span>${t("ltvMetric")}</span><b>${formatPercent(equity.beleihungsauslauf)}</b></div>
+            <div class="overview-line"><span>${t("monthlyRateMetric")}</span><b>${formatMoney(loan.monthlyRate, true)}</b></div>
+            <div class="overview-line"><span>${t("interestPlusTilgungMetric")}</span><b>${formatPercent(loan.interestRate)} + ${formatPercent(loan.initialTilgung)}</b></div>
+          </div>
+        </article>
+        <article class="overview-card highlight-cost">
+          <span>${t("financingCostCard")}</span>
+          <strong>${formatMoney(financingCost)}</strong>
+          <div class="overview-lines">
+            <div class="overview-line"><span>${t("costBasisMetric")}</span><b>${financingCostLabel}</b></div>
+            ${costDetailLines}
+          </div>
+        </article>
+      `;
+
+      const chips = [
+        [t("purchasePriceMetric"), formatMoney(input.purchase.price), t("purchasePriceLabel")],
+        [t("purchaseCostsMetric"), formatMoney(equity.kaufnebenkosten), t("costsEyebrow")],
+        [t("bankEquityMetric"), formatMoney(equity.bankEquity), t("bankEquityMetric")],
+        [t("remainingLiquidityMetric"), formatMoney(equity.verbleibendeLiquiditaet), t("remainingLiquidityMetric")],
+        [t("bankLoanMetric"), formatMoney(equity.bankLoanNeeded), `${t("ltvMetric")} ${formatPercent(equity.beleihungsauslauf)}`],
+        [t("monthlyRateMetric"), formatMoney(loan.monthlyRate, true), t("monthlyAnnuityNote")],
+        [t("annualSpecialMetric"), formatMoney(loan.annualSpecialPayment), t("annualSimulationNote")],
+        [t("totalSpecialPaidMetric"), formatMoney(simulation.totalSondertilgungUntilPayoff), t("totalSpecialPaidMetric")]
+      ];
+
+      if (early?.active) {
+        chips.push(
+          [t("payoffYearMetric"), t("ordinalYear", { year: early.year }), t("notePlannedPayoff")],
+          [t("restDebtAtPayoffMetric"), formatMoney(early.restschuldAtAblösung), t("restDebtAtPayoffMetric")],
+          ["Vorfälligkeitsentschädigung", formatMoney(early.penaltyAmount), t("roughEstimate")],
+          [t("payoffAmountMetric"), formatMoney(early.abloesebetrag), t("restPlusPenalty")],
+          [t("interestUntilPayoffMetric"), formatMoney(early.interestUntilAblösung), t("interestUntilPayoffMetric")]
+        );
+      } else {
+        chips.push(
+          [t("restAfterFixedMetric"), formatMoney(simulation.restschuldAfterZinsbindung), t("yearValue", { value: input.loan.zinsbindungYears })],
+          [t("totalInterestFixedMetric"), formatMoney(simulation.interestUntilZinsbindung), t("fixedYearsLabel")],
+          [totalInterestLabel, formatMoney(simulation.totalInterestUntilPayoff), simulation.payoffMonth ? t("totalInterestUntilPayoff") : t("totalInterestUntilSimulationEnd")],
+          [t("termUntilPayoffMetric"), equity.bankLoanNeeded <= 0 ? t("noLoanNeeded") : formatMonths(simulation.payoffMonth), t("withinSimulationNote")]
+        );
+        const remainingDebtAtSimulationEnd = getRemainingDebtAtSimulationEnd(input, simulation);
+        if (remainingDebtAtSimulationEnd > 0.004) {
+          chips.push([t("simulationEndsBeforePayoff"), formatMoney(remainingDebtAtSimulationEnd), t("remainingDebtAfterYears", { years: input.loan.simulationYears })]);
+        }
+      }
+
+      el.repaymentMetricGrid.innerHTML = chips.map(([label, value, note]) => `
+        <div class="metric-chip"><span>${label}</span><strong>${value}</strong><small>${note}</small></div>
+      `).join("");
+      renderCostBreakdownBar(simulation);
+    }
+
+    function renderCostBreakdownBar(simulation) {
+      const early = simulation.earlyRepaymentResult;
+      const regular = early?.active ? early.regularPaymentsUntilAblösung : simulation.totalRegularPaymentsUntilPayoff;
+      const special = early?.active ? early.sondertilgungUntilAblösung : simulation.totalSondertilgungUntilPayoff;
+      const interest = early?.active ? early.interestUntilAblösung : simulation.totalInterestUntilPayoff;
+      const principalFromRegular = Math.max(0, regular - interest + (early?.active ? early.restschuldAtAblösung : 0));
+      const penalty = early?.active ? early.penaltyAmount : 0;
+      const total = principalFromRegular + interest + special + penalty;
+      const pct = (value) => total > 0 ? Math.max(0, value / total * 100) : 0;
+      el.costBreakdownBar.innerHTML = `
+        <div class="stacked-bar" aria-label="Kostenaufteilung">
+          <div class="bar-part bar-principal" style="width:${pct(principalFromRegular)}%"></div>
+          <div class="bar-part bar-interest" style="width:${pct(interest)}%"></div>
+          <div class="bar-part bar-special" style="width:${pct(special)}%"></div>
+          <div class="bar-part bar-penalty" style="width:${pct(penalty)}%"></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="dot bar-principal"></span>${t("principalLegend")} ${formatMoney(principalFromRegular)}</span>
+          <span class="legend-item"><span class="dot bar-interest"></span>${t("interestLegend")} ${formatMoney(interest)}</span>
+          <span class="legend-item"><span class="dot bar-special"></span>Sondertilgung ${formatMoney(special)}</span>
+          <span class="legend-item"><span class="dot bar-penalty"></span>Vorfälligkeitsentschädigung ${formatMoney(penalty)}</span>
+        </div>
+      `;
+    }
+
+    function getRemainingDebtAtSimulationEnd(input, simulation) {
+      if (simulation.payoffMonth) return 0;
+      const finalRow = simulation.monthlyRows.at(-1);
+      if (!finalRow || finalRow.monthIndex < input.loan.simulationYears * 12) return 0;
+      return Math.max(0, finalRow.endingDebt);
+    }
+
+    function renderBreakdownWarning(input, simulation) {
+      const early = simulation.earlyRepaymentResult;
+      const remainingDebt = early?.active ? 0 : getRemainingDebtAtSimulationEnd(input, simulation);
+      if (remainingDebt <= 0.004) {
+        el.breakdownWarning.innerHTML = "";
+        return;
+      }
+
+      el.breakdownWarning.innerHTML = `<div class="warning"><strong>${t("simulationEndsTitle")}</strong><br>${t("simulationEndsText", { years: input.loan.simulationYears, amount: formatMoney(remainingDebt) })}</div>`;
+    }
+
+    function getYearlyRowClass(row) {
+      const classes = [];
+      if (row.zinsbindungEnds) classes.push("milestone-fixed");
+      if (row.fullPayoff) classes.push("milestone-paid");
+      if (row.earlyRepayment) classes.push("milestone-early");
+      return classes.length > 1 ? "milestone-combined" : classes[0] || "";
+    }
+
+    function renderBreakdownTable(yearly) {
+      if (!yearly.length) {
+        el.breakdownBody.innerHTML = `<tr><td colspan="9" class="notes">${t("noBreakdownRows")}</td></tr>`;
+        return;
+      }
+      el.breakdownBody.innerHTML = yearly.map((row) => {
+        const rowClass = getYearlyRowClass(row);
+        const notes = row.note ? row.note.split("; ").map((note) => `<span class="note-pill">${note}</span>`).join(" ") : "-";
+        return `<tr class="${rowClass}">
+          <td class="year">${row.year}</td>
+          <td>${formatMoney(row.regularPayments)}</td>
+          <td>${formatMoney(row.interestPaid)}</td>
+          <td>${formatMoney(row.regularPrincipalRepaid)}</td>
+          <td>${formatMoney(row.specialPaid)}</td>
+          <td>${formatMoney(row.cumulativePrincipalRepaid)}</td>
+          <td>${formatMoney(row.cumulativeInterestPaid)}</td>
+          <td>${formatMoney(row.restschuldYearEnd)}</td>
+          <td class="notes">${notes}</td>
+        </tr>`;
+      }).join("");
+    }
+
+    function renderWarnings(input, equity, loan, simulation) {
+      if (!state.warningsEnabled) {
+        el.warnings.innerHTML = "";
+        return;
+      }
+
+      const warnings = [...(equity.warnings || []), ...simulation.warnings];
+      if (input.purchase.price <= 0) warnings.push({ type: "danger", text: t("warningPurchasePricePositive") });
+      if (input.purchase.kapitalMode === "targetLoan") warnings.push({ type: "ok", text: t("kapitalModeTargetLine", { loan: formatMoney(input.purchase.targetLoanAmount), equity: formatMoney(equity.eigenkapitalbedarfFuerKauf) }) });
+      if (input.purchase.kapitalMode === "purchaseEquity") warnings.push({ type: "ok", text: t("kapitalModeEquityLine", { equity: formatMoney(input.purchase.purchaseEquityBudget), loan: formatMoney(equity.bankLoanNeeded) }) });
+      if (equity.bankLoanNeeded <= 0 && input.purchase.price > 0) warnings.push({ type: "ok", text: `${t("noLoanNeeded")}: ${t("bankEquityMetric")} ${t("purchasePriceLabel")}.` });
+      if (loan.annualSpecialPayment > 0) warnings.push({ type: "ok", text: `${t("annualSpecialMetric")} ${formatMoney(loan.annualSpecialPayment)}. ${t("annualSpecialNote")}` });
+      if (simulation.earlyRepaymentResult?.active && simulation.earlyRepaymentResult.warning) warnings.push({ type: simulation.earlyRepaymentResult.restschuldAtAblösung === 0 ? "ok" : "warning", text: simulation.earlyRepaymentResult.warning });
+      if (input.earlyRepayment.penaltyPercent < 0) warnings.push({ type: "danger", text: "Penalty percent cannot be negative。" });
+
+      const seen = new Set();
+      el.warnings.innerHTML = warnings.filter((warning) => {
+        if (seen.has(warning.text)) return false;
+        seen.add(warning.text);
+        return true;
+      }).map((warning) => `<div class="warning ${warning.type || ""}">${warning.text}</div>`).join("");
+    }
+
+    function formatKapitalMode(mode) {
+      if (mode === "targetLoan") return "Gewünschter Darlehensbetrag";
+      if (mode === "purchaseEquity") return "Eigenkapital für Kauf";
+      return mode || "-";
+    }
+
+    function exportCSV() {
+      if (!state.lastResult || !state.lastResult.yearly.length) return;
+      const headers = ["year", "regularPayments", "interestPaid", "regularPrincipalRepaid", "sondertilgungPaid", "cumulativePrincipalRepaid", "cumulativeInterestPaid", "restschuldYearEnd", "note"];
+      const rows = state.lastResult.yearly.map((row) => [
+        row.year,
+        roundCents(row.regularPayments),
+        roundCents(row.interestPaid),
+        roundCents(row.regularPrincipalRepaid),
+        roundCents(row.sondertilgungPaid),
+        roundCents(row.cumulativePrincipalRepaid),
+        roundCents(row.cumulativeInterestPaid),
+        roundCents(row.restschuldYearEnd),
+        row.note
+      ]);
+      const csv = [headers, ...rows].map((row) => row.map(csvCell).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "immobilienfinanzierung-breakdown.csv";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function roundCents(value) {
+      return Math.round((Number.isFinite(value) ? value : 0) * 100) / 100;
+    }
+
+    function csvCell(value) {
+      const text = String(value ?? "");
+      return /[",\n]/.test(text) ? `"${text.replaceAll("\"", "\"\"")}"` : text;
+    }
+
+    function syncBrokerPreset() {
+      if (el.brokerPreset.value === "custom") {
+        el.brokerRate.readOnly = false;
+      } else {
+        el.brokerRate.value = el.brokerPreset.value;
+        el.brokerRate.readOnly = true;
+      }
+    }
+
+    function syncAdvancedTax() {
+      el.transferTaxRate.readOnly = !el.advancedTax.checked;
+      if (!el.advancedTax.checked) el.transferTaxRate.value = "6.5";
+    }
+
+    function updateInputVisibility(input) {
+      el.targetLoanField.classList.toggle("hidden", input.purchase.kapitalMode !== "targetLoan");
+      el.purchaseEquityField.classList.toggle("hidden", input.purchase.kapitalMode !== "purchaseEquity");
+      el.tilgungField.classList.toggle("hidden", input.loan.calculationMode !== "rateFromTilgung");
+      el.monthlyRateField.classList.toggle("hidden", input.loan.calculationMode !== "tilgungFromRate");
+      el.monthlyRate.readOnly = false;
+      el.initialTilgung.readOnly = false;
+      el.interestRate.readOnly = false;
+      el.specialCustomAmount.readOnly = input.sondertilgung.mode !== "custom";
+      el.penaltyPercent.readOnly = input.earlyRepayment.penaltyMode !== "customPct";
+      el.fixedPenaltyAmount.readOnly = input.earlyRepayment.penaltyMode !== "fixed";
+      el.earlyYear.max = String(input.loan.simulationYears);
+    }
+
+    function pushDerivedValuesToInputs(loan, mode) {
+      if (mode === "rateFromTilgung") {
+        el.loanDerivedResult.innerHTML = `<span>${t("derivedMonthlyRateLabel")}</span><strong>${formatMoney(loan.monthlyRate, true)}</strong><small>${t("derivedMonthlyRateNote")}</small>`;
+      }
+      if (mode === "tilgungFromRate" && Number.isFinite(loan.initialTilgung)) {
+        el.loanDerivedResult.innerHTML = `<span>${t("derivedTilgungLabel")}</span><strong>${formatPercent(loan.initialTilgung)}</strong><small>${t("derivedTilgungNote")}</small>`;
+      }
+    }
+
+    function recalculate() {
+      syncAdvancedTax();
+      syncBrokerPreset();
+      let input = parseInputs();
+      updateInputVisibility(input);
+      const equity = calculateEquityStrategy(input);
+      const loan = deriveLoanValues(input, equity);
+      pushDerivedValuesToInputs(loan, input.loan.calculationMode);
+
+      input = parseInputs();
+      updateInputVisibility(input);
+      const refreshedEquity = calculateEquityStrategy(input);
+      const refreshedLoan = deriveLoanValues(input, refreshedEquity);
+      refreshedLoan.warnings = [...loan.warnings, ...refreshedLoan.warnings];
+      const simulation = simulateAmortization(input, refreshedEquity, refreshedLoan);
+      const yearly = simulation.yearlyRows;
+
+      state.lastResult = { input, equity: refreshedEquity, purchase: refreshedEquity, loan: refreshedLoan, simulation, yearly };
+
+      renderWarnings(input, refreshedEquity, refreshedLoan, simulation);
+      renderCostComputed(refreshedEquity);
+      renderCapitalLiquidityLine(refreshedEquity);
+      renderSonderComputed(refreshedLoan);
+      renderEarlyCompact(simulation);
+      renderFinancingOverview({ input, equity: refreshedEquity, loan: refreshedLoan, simulation });
+      renderBreakdownWarning(input, simulation);
+      renderBreakdownTable(yearly);
+    }
+
+    document.querySelectorAll("input, select").forEach((node) => {
+      if (node.type === "file" || node.id === "languageSelect") return;
+      node.addEventListener("input", () => {
+        state.warningsEnabled = true;
+        recalculate();
+        markModifiedIfNeeded();
+      });
+      node.addEventListener("change", () => {
+        state.warningsEnabled = true;
+        recalculate();
+        markModifiedIfNeeded();
+      });
+    });
+    el.exportRecordJson.addEventListener("click", () => exportRecordJSON(false));
+    el.importRecordJson.addEventListener("click", () => el.recordImportFile.click());
+    el.recordImportFile.addEventListener("change", () => {
+      const file = el.recordImportFile.files?.[0];
+      if (file) loadRecordFromFile(file);
+      el.recordImportFile.value = "";
+    });
+    el.newBlankRecord.addEventListener("click", newBlankRecord);
+    el.addCurrentToComparison.addEventListener("click", addCurrentRecordToComparison);
+    el.comparisonAddCurrent.addEventListener("click", addCurrentRecordToComparison);
+    el.comparisonImportJson.addEventListener("click", () => el.comparisonImportFiles.click());
+    el.comparisonImportFiles.addEventListener("change", () => {
+      const files = [...(el.comparisonImportFiles.files || [])];
+      if (files.length) importRecordsToComparison(files);
+      el.comparisonImportFiles.value = "";
+    });
+    el.comparisonClear.addEventListener("click", clearComparisonBasket);
+    el.comparison.addEventListener("click", (event) => {
+      const loadButton = event.target.closest("[data-load-comparison]");
+      const removeButton = event.target.closest("[data-remove-comparison]");
+      if (loadButton) loadComparisonRecordIntoCalculator(Number(loadButton.dataset.loadComparison));
+      if (removeButton) removeComparisonRecord(Number(removeButton.dataset.removeComparison));
+    });
+    el.downloadCsv.addEventListener("click", exportCSV);
+    el.printPage.addEventListener("click", () => window.print());
+    el.languageSelect.addEventListener("change", () => {
+      currentLanguage = SUPPORTED_LANGUAGES.includes(el.languageSelect.value) ? el.languageSelect.value : "de";
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
+      applyStaticTranslations();
+      renderRecordStatus();
+      renderComparisonBasket();
+      recalculate();
+    });
+
+    applyStaticTranslations();
+    defaultFormState = captureDefaultFormState();
+    restoreComparisonBasket();
+    renderComparisonBasket();
+    renderRecordStatus();
+    recalculate();
+  </script>
+</body>
+</html>
