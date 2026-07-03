@@ -1,6 +1,6 @@
 # Immobilienfinanzierung Rechner
 
-Ein statischer Rechner zur groben Simulation von Immobilienfinanzierung, Kaufnebenkosten, Eigenkapitalbedarf, Monatsrate, Sondertilgung und vorzeitiger Ablösung. Die Oberfläche unterstützt Deutsch, Englisch und Chinesisch. Deutsch ist die Standardsprache.
+Ein statischer Rechner zur groben Simulation von Immobilienfinanzierung, Kaufnebenkosten, Eigenkapitalbedarf, Monatsrate, Sondertilgung und vorzeitiger Ablösung. Die Oberfläche unterstützt Deutsch, Englisch, Chinesisch und Japanisch. Deutsch ist die Standardsprache.
 
 ## Haftungsausschluss
 
@@ -11,13 +11,24 @@ Dieses Tool ersetzt keine Finanzierungsberatung, keine Steuerberatung, keine Rec
 ## Verwendung
 
 1. Öffne `index.html` direkt im Browser.
-2. Wähle oben rechts die Sprache: Deutsch, English oder 中文.
+2. Wähle oben rechts die Sprache und das Zahlenformat, zum Beispiel `1.234,56`, `1,234.56` oder `1 234,56`.
 3. Trage Kaufpreis, gewünschtes Bankdarlehen oder eingesetztes Eigenkapital sowie aktuelle liquide Mittel ein.
 4. Prüfe und passe Kaufnebenkosten wie Grunderwerbsteuer, Notar/Grundbuch, Makler und fixe Zusatzkosten an.
 5. Trage Sollzins, Tilgung, Zinsbindung und Simulationsdauer ein.
 6. Optional: Sondertilgung oder vorzeitige Ablösung simulieren.
 7. Nutze die Übersicht, die jährliche Rückzahlungstabelle und den Vergleichsbereich zur Orientierung.
 8. Bei Bedarf kann ein Datensatz als JSON exportiert und später wieder importiert werden. Lokale JSON-Dateien werden durch `.gitignore` nicht ins Repository aufgenommen.
+
+## Sprachen beitragen
+
+Die Sprachdaten liegen in `i18n.js`, damit neue Übersetzungen ohne Änderungen an der Rechnerlogik ergänzt werden können.
+
+1. Füge den neuen Sprachcode zu `supportedLanguages` hinzu, zum Beispiel `fr`.
+2. Ergänze die passende Locale in `locales`, zum Beispiel `fr: "fr-FR"`.
+3. Ergänze in jedem Eintrag unter `translations` den neuen Sprachcode.
+4. Falls ein Text noch fehlt, fällt der Rechner auf Deutsch zurück.
+
+Neue UI-Texte in `index.html` müssen einen passenden Schlüssel in `i18n.js` bekommen. Das gilt für `data-i18n`, `data-i18n-placeholder` und direkte Aufrufe von `t("...")`.
 
 ## Git-Hinweis
 
